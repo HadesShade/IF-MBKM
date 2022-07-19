@@ -317,35 +317,6 @@ LOCK TABLES `tbl_prodi_if` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbl_register_approval`
---
-
-DROP TABLE IF EXISTS `tbl_register_approval`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_register_approval` (
-  `nomor_induk` varchar(30) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `alamat` text NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telp` varchar(20) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` text NOT NULL,
-  `approval_status` enum('Waiting','Accepted') NOT NULL DEFAULT 'Waiting',
-  PRIMARY KEY (`nomor_induk`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_register_approval`
---
-
-LOCK TABLES `tbl_register_approval` WRITE;
-/*!40000 ALTER TABLE `tbl_register_approval` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_register_approval` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tbl_user`
 --
 
@@ -360,7 +331,7 @@ CREATE TABLE `tbl_user` (
   `telp` varchar(20) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` text NOT NULL,
-  `role` enum('Admin','Dosen','Kepala Prodi','Sekretaris Jurusan','Ketua Jurusan') NOT NULL,
+  `role` enum('Mahasiswa','Dosen','Kepala Prodi','Sekretaris Jurusan','Ketua Jurusan') NOT NULL,
   PRIMARY KEY (`nomor_induk`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -384,4 +355,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-19 16:38:53
+-- Dump completed on 2022-07-19 19:57:08

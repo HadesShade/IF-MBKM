@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IF-MBKM | Ajukan MBKM</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/jqvmap/jqvmap.min.css') }}";>
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for ('static',filename='dist/css/adminlte.min.css') }}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ url_for ('static',filename='plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{{ url_for ('static',filename='plugins/daterangepicker/daterangepicker.css') }}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{ url_for ('static',filename='plugins/summernote/summernote-bs4.min.css') }}">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{{ url_for ('static',filename='dist/img/polibatam.png') }}" alt="Polibatam Logo" height="60" width="60">
+  </div>
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="." class="brand-link">
+      <img src="{{ url_for ('static',filename='dist/img/polibatam.png') }}" alt="Polibatam Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">IF-MBKM</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ url_for ('static',filename='dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Username Here</a>
+        </div>
+      </div>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="/mahasiswa/index-mhs" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Beranda
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Ajukan MBKM
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-info-circle"></i>
+              <p>
+                Status Pengajuan MBKM
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-calendar-alt"></i>
+              <p>
+                Jadwal Asesmen MBKM
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>
+                Keluar
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Ajukan MBKM</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"><a href="#">Ajukan MBKM</a></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Formulir Pengajuan MBKM</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="namaLengkap">Nama Lengkap</label>
+              <input type="email" class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" readonly required>
+            </div>
+            <div class="form-group">
+              <label for="nomorInduk">Nomor Induk</label>
+              <input type="text" class="form-control" id="nomorInduk" placeholder="Masukkan Nomor Induk" readonly required>
+            </div>
+            <div class="form-group">
+              <label for="programStudi">Program Studi</label>
+              <select class="form-control custom-select" id="programStudi" required>
+                <option value="" disabled selected>-- Pilih Program Studi --</option>
+                <option value="Prodi 1">Prodi 1</option>
+                <option value="Prodi 2">Prodi 2</option>
+                <option value="Prodi 3">Prodi 3</option>
+                <option value="Prodi 4">Prodi 4</option>
+                <option value="Prodi 5">Prodi 5</option>
+                <option value="Prodi 6">Prodi 6</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="angkatan">Tahun Angkatan</label>
+              <input type="number" min="0" class="form-control" id="angkatan" placeholder="Masukkan Tahun Angkatan" required>
+              <script type="text/javascript">
+              window.onload = function() {
+                document.getElementById("angkatan").value = new Date().getFullYear();
+              };
+              </script> 
+            </div>
+            <div class="form-group">
+              <label for="namaMBKM">Nama Program MBKM</label>
+              <input type="text" class="form-control" id="namaMBKM" placeholder="Masukkan Nama Program MBKM" required>
+            </div>
+            <div class="form-group">
+              <label for="jenisMBKM">Jenis Program MBKM</label>
+              <input type="text" class="form-control" id="jenisMBKM" placeholder="Masukkan Jenis Program MBKM" required>
+            </div>
+            <div class="form-group">
+              <label for="tempatMBKM">Tempat Program MBKM</label>
+              <input type="text" class="form-control" id="tempatMBKM" placeholder="Masukkan Tempat Program MBKM" required>
+            </div>
+            <div class="form-group">
+              <label for="semesterKlaim">Semester Klaim MBKM</label>
+              <input type="number" min="1" value="1" class="form-control" id="semesterKlaim" placeholder="Masukkan Semester Klaim MBKM" required>
+            </div>
+            <div class="form-group">
+              <label for="buktiMBKM">Bukti Penerimaan Program MBKM </label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="buktiMBKM" required>
+                  <label class="custom-file-label" for="buktiMBKM">Pilih File</label>
+                </div>
+              </div>
+            </div>
+            <label for="matkul1">Mata Kuliah 1</label>
+            <div class="form-group row" id="matkul1">
+              <div class="col-3">
+                <select class="custom-select" id="kodeMatkul1" required>
+                  <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
+                  <option value="Kode 1">Kode 1</option>
+                  <option value="Kode 2">Kode 2</option>
+                  <option value="Kode 3">Kode 3</option>
+                  <option value="Kode 4">Kode 4</option>
+                  <option value="Kode 5">Kode 5</option>
+                  <option value="Kode 6">Kode 6</option>
+                  <option value="Kode 7">Kode 7</option>
+                  <option value="Kode 8">Kode 8</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <select class="custom-select" id="namaMatkul1" required>
+                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
+                  <option value="Nama 1">Nama 1</option>
+                  <option value="Nama 2">Nama 2</option>
+                  <option value="Nama 3">Nama 3</option>
+                  <option value="Nama 4">Nama 4</option>
+                  <option value="Nama 5">Nama 5</option>
+                  <option value="Nama 6">Nama 6</option>
+                  <option value="Nama 7">Nama 7</option>
+                  <option value="Nama 8">Nama 8</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="custom-select" id="dosenMatkul1" required>
+                  <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
+                  <option value="Dosen 1">Dosen 1</option>
+                  <option value="Dosen 2">Dosen 2</option>
+                  <option value="Dosen 3">Dosen 3</option>
+                  <option value="Dosen 4">Dosen 4</option>
+                  <option value="Dosen 5">Dosen 5</option>
+                  <option value="Dosen 6">Dosen 6</option>
+                  <option value="Dosen 7">Dosen 7</option>
+                  <option value="Dosen 8">Dosen 8</option>
+                </select>
+                </div>
+            </div>
+            <label for="matkul2">Mata Kuliah 2</label>
+            <div class="form-group row" id="matkul2">
+              <div class="col-3">
+                <select class="custom-select" id="kodeMatkul2">
+                  <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
+                  <option value="Kode 1">Kode 1</option>
+                  <option value="Kode 2">Kode 2</option>
+                  <option value="Kode 3">Kode 3</option>
+                  <option value="Kode 4">Kode 4</option>
+                  <option value="Kode 5">Kode 5</option>
+                  <option value="Kode 6">Kode 6</option>
+                  <option value="Kode 7">Kode 7</option>
+                  <option value="Kode 8">Kode 8</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <select class="custom-select" id="namaMatkul2">
+                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
+                  <option value="Nama 1">Nama 1</option>
+                  <option value="Nama 2">Nama 2</option>
+                  <option value="Nama 3">Nama 3</option>
+                  <option value="Nama 4">Nama 4</option>
+                  <option value="Nama 5">Nama 5</option>
+                  <option value="Nama 6">Nama 6</option>
+                  <option value="Nama 7">Nama 7</option>
+                  <option value="Nama 8">Nama 8</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="custom-select" id="dosenMatkul2">
+                  <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
+                  <option value="Dosen 1">Dosen 1</option>
+                  <option value="Dosen 2">Dosen 2</option>
+                  <option value="Dosen 3">Dosen 3</option>
+                  <option value="Dosen 4">Dosen 4</option>
+                  <option value="Dosen 5">Dosen 5</option>
+                  <option value="Dosen 6">Dosen 6</option>
+                  <option value="Dosen 7">Dosen 7</option>
+                  <option value="Dosen 8">Dosen 8</option>
+                </select>
+                </div>
+            </div>
+            <label for="matkul3">Mata Kuliah 3</label>
+            <div class="form-group row" id="matkul3">
+              <div class="col-3">
+                <select class="custom-select" id="kodeMatkul3">
+                  <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
+                  <option value="Kode 1">Kode 1</option>
+                  <option value="Kode 2">Kode 2</option>
+                  <option value="Kode 3">Kode 3</option>
+                  <option value="Kode 4">Kode 4</option>
+                  <option value="Kode 5">Kode 5</option>
+                  <option value="Kode 6">Kode 6</option>
+                  <option value="Kode 7">Kode 7</option>
+                  <option value="Kode 8">Kode 8</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <select class="custom-select" id="namaMatkul3">
+                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
+                  <option value="Nama 1">Nama 1</option>
+                  <option value="Nama 2">Nama 2</option>
+                  <option value="Nama 3">Nama 3</option>
+                  <option value="Nama 4">Nama 4</option>
+                  <option value="Nama 5">Nama 5</option>
+                  <option value="Nama 6">Nama 6</option>
+                  <option value="Nama 7">Nama 7</option>
+                  <option value="Nama 8">Nama 8</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="custom-select" id="dosenMatkul3">
+                  <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
+                  <option value="Dosen 1">Dosen 1</option>
+                  <option value="Dosen 2">Dosen 2</option>
+                  <option value="Dosen 3">Dosen 3</option>
+                  <option value="Dosen 4">Dosen 4</option>
+                  <option value="Dosen 5">Dosen 5</option>
+                  <option value="Dosen 6">Dosen 6</option>
+                  <option value="Dosen 7">Dosen 7</option>
+                  <option value="Dosen 8">Dosen 8</option>
+                </select>
+                </div>
+            </div>
+            <label for="matkul4">Mata Kuliah 4</label>
+            <div class="form-group row" id="matkul4">
+              <div class="col-3">
+                <select class="custom-select" id="kodeMatkul4">
+                  <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
+                  <option value="Kode 1">Kode 1</option>
+                  <option value="Kode 2">Kode 2</option>
+                  <option value="Kode 3">Kode 3</option>
+                  <option value="Kode 4">Kode 4</option>
+                  <option value="Kode 5">Kode 5</option>
+                  <option value="Kode 6">Kode 6</option>
+                  <option value="Kode 7">Kode 7</option>
+                  <option value="Kode 8">Kode 8</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <select class="custom-select" id="namaMatkul4">
+                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
+                  <option value="Nama 1">Nama 1</option>
+                  <option value="Nama 2">Nama 2</option>
+                  <option value="Nama 3">Nama 3</option>
+                  <option value="Nama 4">Nama 4</option>
+                  <option value="Nama 5">Nama 5</option>
+                  <option value="Nama 6">Nama 6</option>
+                  <option value="Nama 7">Nama 7</option>
+                  <option value="Nama 8">Nama 8</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="custom-select" id="dosenMatkul4">
+                  <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
+                  <option value="Dosen 1">Dosen 1</option>
+                  <option value="Dosen 2">Dosen 2</option>
+                  <option value="Dosen 3">Dosen 3</option>
+                  <option value="Dosen 4">Dosen 4</option>
+                  <option value="Dosen 5">Dosen 5</option>
+                  <option value="Dosen 6">Dosen 6</option>
+                  <option value="Dosen 7">Dosen 7</option>
+                  <option value="Dosen 8">Dosen 8</option>
+                </select>
+                </div>
+            </div>
+            <label for="matkul5">Mata Kuliah 5</label>
+            <div class="form-group row" id="matkul5">
+              <div class="col-3">
+                <select class="custom-select" id="kodeMatkul5">
+                  <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
+                  <option value="Kode 1">Kode 1</option>
+                  <option value="Kode 2">Kode 2</option>
+                  <option value="Kode 3">Kode 3</option>
+                  <option value="Kode 4">Kode 4</option>
+                  <option value="Kode 5">Kode 5</option>
+                  <option value="Kode 6">Kode 6</option>
+                  <option value="Kode 7">Kode 7</option>
+                  <option value="Kode 8">Kode 8</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <select class="custom-select" id="namaMatkul5">
+                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
+                  <option value="Nama 1">Nama 1</option>
+                  <option value="Nama 2">Nama 2</option>
+                  <option value="Nama 3">Nama 3</option>
+                  <option value="Nama 4">Nama 4</option>
+                  <option value="Nama 5">Nama 5</option>
+                  <option value="Nama 6">Nama 6</option>
+                  <option value="Nama 7">Nama 7</option>
+                  <option value="Nama 8">Nama 8</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="custom-select" id="dosenMatkul5">
+                  <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
+                  <option value="Dosen 1">Dosen 1</option>
+                  <option value="Dosen 2">Dosen 2</option>
+                  <option value="Dosen 3">Dosen 3</option>
+                  <option value="Dosen 4">Dosen 4</option>
+                  <option value="Dosen 5">Dosen 5</option>
+                  <option value="Dosen 6">Dosen 6</option>
+                  <option value="Dosen 7">Dosen 7</option>
+                  <option value="Dosen 8">Dosen 8</option>
+                </select>
+                </div>
+            </div>
+            <label for="matkul6">Mata Kuliah 6</label>
+            <div class="form-group row" id="matkul6">
+              <div class="col-3">
+                <select class="custom-select" id="kodeMatkul6">
+                  <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
+                  <option value="Kode 1">Kode 1</option>
+                  <option value="Kode 2">Kode 2</option>
+                  <option value="Kode 3">Kode 3</option>
+                  <option value="Kode 4">Kode 4</option>
+                  <option value="Kode 5">Kode 5</option>
+                  <option value="Kode 6">Kode 6</option>
+                  <option value="Kode 7">Kode 7</option>
+                  <option value="Kode 8">Kode 8</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <select class="custom-select" id="namaMatkul6">
+                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
+                  <option value="Nama 1">Nama 1</option>
+                  <option value="Nama 2">Nama 2</option>
+                  <option value="Nama 3">Nama 3</option>
+                  <option value="Nama 4">Nama 4</option>
+                  <option value="Nama 5">Nama 5</option>
+                  <option value="Nama 6">Nama 6</option>
+                  <option value="Nama 7">Nama 7</option>
+                  <option value="Nama 8">Nama 8</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="custom-select" id="dosenMatkul6">
+                  <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
+                  <option value="Dosen 1">Dosen 1</option>
+                  <option value="Dosen 2">Dosen 2</option>
+                  <option value="Dosen 3">Dosen 3</option>
+                  <option value="Dosen 4">Dosen 4</option>
+                  <option value="Dosen 5">Dosen 5</option>
+                  <option value="Dosen 6">Dosen 6</option>
+                  <option value="Dosen 7">Dosen 7</option>
+                  <option value="Dosen 8">Dosen 8</option>
+                </select>
+                </div>
+            </div>
+            <label for="matkul7">Mata Kuliah 7</label>
+            <div class="form-group row" id="matkul7">
+              <div class="col-3">
+                <select class="custom-select" id="kodeMatkul7">
+                  <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
+                  <option value="Kode 1">Kode 1</option>
+                  <option value="Kode 2">Kode 2</option>
+                  <option value="Kode 3">Kode 3</option>
+                  <option value="Kode 4">Kode 4</option>
+                  <option value="Kode 5">Kode 5</option>
+                  <option value="Kode 6">Kode 6</option>
+                  <option value="Kode 7">Kode 7</option>
+                  <option value="Kode 8">Kode 8</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <select class="custom-select" id="namaMatkul7">
+                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
+                  <option value="Nama 1">Nama 1</option>
+                  <option value="Nama 2">Nama 2</option>
+                  <option value="Nama 3">Nama 3</option>
+                  <option value="Nama 4">Nama 4</option>
+                  <option value="Nama 5">Nama 5</option>
+                  <option value="Nama 6">Nama 6</option>
+                  <option value="Nama 7">Nama 7</option>
+                  <option value="Nama 8">Nama 8</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="custom-select" id="dosenMatkul7">
+                  <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
+                  <option value="Dosen 1">Dosen 1</option>
+                  <option value="Dosen 2">Dosen 2</option>
+                  <option value="Dosen 3">Dosen 3</option>
+                  <option value="Dosen 4">Dosen 4</option>
+                  <option value="Dosen 5">Dosen 5</option>
+                  <option value="Dosen 6">Dosen 6</option>
+                  <option value="Dosen 7">Dosen 7</option>
+                  <option value="Dosen 8">Dosen 8</option>
+                </select>
+                </div>
+            </div>
+            <label for="matkul8">Mata Kuliah 8</label>
+            <div class="form-group row" id="matkul8">
+              <div class="col-3">
+                <select class="custom-select" id="kodeMatkul8">
+                  <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
+                  <option value="Kode 1">Kode 1</option>
+                  <option value="Kode 2">Kode 2</option>
+                  <option value="Kode 3">Kode 3</option>
+                  <option value="Kode 4">Kode 4</option>
+                  <option value="Kode 5">Kode 5</option>
+                  <option value="Kode 6">Kode 6</option>
+                  <option value="Kode 7">Kode 7</option>
+                  <option value="Kode 8">Kode 8</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <select class="custom-select" id="namaMatkul8">
+                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
+                  <option value="Nama 1">Nama 1</option>
+                  <option value="Nama 2">Nama 2</option>
+                  <option value="Nama 3">Nama 3</option>
+                  <option value="Nama 4">Nama 4</option>
+                  <option value="Nama 5">Nama 5</option>
+                  <option value="Nama 6">Nama 6</option>
+                  <option value="Nama 7">Nama 7</option>
+                  <option value="Nama 8">Nama 8</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="custom-select" id="dosenMatkul8">
+                  <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
+                  <option value="Dosen 1">Dosen 1</option>
+                  <option value="Dosen 2">Dosen 2</option>
+                  <option value="Dosen 3">Dosen 3</option>
+                  <option value="Dosen 4">Dosen 4</option>
+                  <option value="Dosen 5">Dosen 5</option>
+                  <option value="Dosen 6">Dosen 6</option>
+                  <option value="Dosen 7">Dosen 7</option>
+                  <option value="Dosen 8">Dosen 8</option>
+                </select>
+                </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Ajukan</button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2022 <a href=".">IF-MBKM</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0.0
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{{ url_for ('static',filename='plugins/jquery/jquery.min.js') }}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{ url_for ('static',filename='plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{{url_for ('static',filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- ChartJS -->
+<script src="{{ url_for ('static',filename='plugins/chart.js/Chart.min.js') }}"></script>
+<!-- Sparkline -->
+<script src="{{ url_for ('static',filename='plugins/sparklines/sparkline.js') }}"></script>
+<!-- JQVMap -->
+<script src="{{ url_for ('static',filename='plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{{ url_for ('static',filename='plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+<!-- daterangepicker -->
+<script src="{{ url_for ('static',filename='plugins/moment/moment.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/daterangepicker/daterangepicker.js') }}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ url_for ('static',filename='plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<!-- Summernote -->
+<script src="{{ url_for ('static',filename='plugins/summernote/summernote-bs4.min.js') }}"></script>
+<!-- overlayScrollbars -->
+<script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
+</body>
+</html>
