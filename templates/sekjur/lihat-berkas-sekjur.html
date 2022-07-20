@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IF-MBKM | Beranda</title>
+  <title>IF-MBKM | Lihat Berkas MBKM</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -69,8 +69,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item">
+            <a href="/sekjur/index-sekjur" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Beranda
@@ -78,26 +78,18 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/mahasiswa/ajukan-mbkm" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+            <a href="/sekjur/daftar-pengajuan-mbkm" class="nav-link active">
+              <i class="nav-icon fas fa-list"></i>
               <p>
-                Ajukan MBKM
+                Daftar Pengajuan MBKM
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/mahasiswa/status-mbkm-mhs" class="nav-link">
-              <i class="nav-icon fas fa-info-circle"></i>
-              <p>
-                Status Pengajuan MBKM
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/mahasiswa/jadwal-asesmen-mhs" class="nav-link">
+            <a href="/sekjur/jadwal-asesmen-sekjur" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
-                Jadwal Asesmen MBKM
+                Jadwal Asesmen
               </p>
             </a>
           </li>
@@ -123,11 +115,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Beranda</h1>
+            <h1 class="m-0">Lihat Berkas MBKM</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active"><a href="#">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="/sekjur/daftar-pengajuan-mbkm">Daftar Pengajuan MBKM</a></li>
+              <li class="breadcrumb-item active">Lihat Berkas MBKM</a></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -137,70 +130,50 @@
 
     <!-- Main content -->
     <section class="content">
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <img src="{{ url_for ('static',filename='dist/img/user1-128x128.jpg') }}" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">Full Name Here</h5>
-                  <p class="text-muted mb-1">Role Here</p>
-                  <p class="text-muted mb-4">Politeknik Negeri Batam</p>
-                </div>
-              </div>
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Lihat Berkas MBKM</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="idPengajuan">Nomor Pengajuan</label>
+              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly>
             </div>
-            <div class="col-lg-8">
-              <div class="card mb-4">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nama Lengkap</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nama Lengkap Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nomor Induk</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nomor Induk Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Alamat Surel</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Alamat Surel Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nomor Telepon</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nomor Telepon Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Alamat Rumah</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Alamat Rumah Here</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="form-group">
+              <label for="linkSertifikat">Sertifikat Kegiatan MBKM</label>
+              <input type="text" class="form-control" id="linkSertifikat" placeholder="Link Sertifikat Kegiatan MBKM" readonly>
+            </div>
+            <div class="form-group">
+              <label for="linkLaporan">Laporan Kegiatan MBKM</label>
+              <input type="text" class="form-control" id="linkLaporan" placeholder="Link Laporan Kegiatan MBKM" readonly>
+            </div>
+            <div class="form-group">
+              <label for="linkHasil">Hasil Kegiatan MBKM</label>
+              <input type="text" class="form-control" id="linkHasil" placeholder="Link Hasil Kegiatan MBKM" readonly>
+            </div>
+            <div class="form-group">
+              <label for="mulaiTgl">Tanggal Mulai Kegiatan MBKM</label>
+              <input type="text" class="form-control" id="mulaiTgl" placeholder="dd/mm/yyyy" readonly>
+            </div>
+            <div class="form-group">
+              <label for="selesaiTgl">Tanggal Selesai Kegiatan MBKM</label>
+              <input type="text" class="form-control" id="selesaiTgl" placeholder="dd/mm/yyyy" readonly>
+            </div>
+            <div class="form-group">
+              <label for="linkDokumentasi">Dokumentasi Kegiatan MBKM</label>
+              <input type="text" class="form-control" id="linkDokumentasi" placeholder="Link Dokumentasi Kegiatan MBKM" readonly>
             </div>
           </div>
-        </div>
+
+          <!-- /.card-body -->
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Kembali</button>
+          </div>
+        </form>
+      </div>
     </section>
     <!-- /.content -->
   </div>

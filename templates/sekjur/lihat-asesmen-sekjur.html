@@ -3,12 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IF-MBKM | Unggah Berkas MBKM</title>
-
+  <title>IF-MBKM | Lihat Asesmen MBKM</title>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
@@ -25,6 +31,11 @@
   <link rel="stylesheet" href="{{ url_for ('static',filename='plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ url_for ('static',filename='plugins/summernote/summernote-bs4.min.css') }}">
+  <style>
+    .toolbar {
+      float: left;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -69,46 +80,38 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="/mahasiswa/index-mhs" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
-              <p>
-                Beranda
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/mahasiswa/ajukan-mbkm" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Ajukan MBKM
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/mahasiswa/status-mbkm-mhs" class="nav-link active">
-              <i class="nav-icon fas fa-info-circle"></i>
-              <p>
-                Status Pengajuan MBKM
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/mahasiswa/jadwal-asesmen-mhs" class="nav-link">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Jadwal Asesmen MBKM
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                Keluar
-              </p>
-            </a>
-          </li>
+               <li class="nav-item">
+                <a href="/sekjur/index-sekjur" class="nav-link">
+                  <i class="nav-icon fas fa-home"></i>
+                  <p>
+                    Beranda
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/sekjur/daftar-pengajuan-mbkm" class="nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p>
+                    Daftar Pengajuan MBKM
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/sekjur/jadwal-asesmen-sekjur" class="nav-link">
+                  <i class="nav-icon fas fa-calendar-alt"></i>
+                  <p>
+                    Jadwal Asesmen
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-sign-out-alt"></i>
+                  <p>
+                    Keluar
+                  </p>
+                </a>
+              </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -123,24 +126,23 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Unggah Berkas MBKM</h1>
+            <h1 class="m-0">Lihat Asesmen MBKM</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/mahasiswa/status-mbkm-mhs">Status Pengajuan MBKM</a></li>
-              <li class="breadcrumb-item active">Unggah Berkas MBKM</li>
+              <li class="breadcrumb-item"><a href="/sekjur/jadwal-asesmen-sekjur">Jadwal Asesmen MBKM</a></li>
+              <li class="breadcrumb-item active">Lihat Asesmen MBKM</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
       <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">Unggah Berkas MBKM</h3>
+          <h3 class="card-title">Lihat Asesmen MBKM</h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -148,68 +150,65 @@
           <div class="card-body">
             <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
-              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly required>
+              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly>
             </div>
             <div class="form-group">
-              <label for="sertifikatMBKM">Sertifikat Kegiatan MBKM</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="sertifikatMBKM" required>
-                  <label class="custom-file-label" for="sertifikatMBKM">Pilih File</label>
-                </div>
-              </div>
+              <label for="lihatwaktuAsesmen">Waktu Asesmen</label>
+              <input type="text" class="form-control" id="lihatwaktuAsesmen" placeholder="Masukkan Waktu Asesmen" readonly>
             </div>
             <div class="form-group">
-              <label for="laporanMBKM">Laporan Kegiatan MBKM</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="laporanMBKM" required>
-                  <label class="custom-file-label" for="laporanMBKM">Pilih File</label>
-                </div>
-              </div>
+              <label for="tempatLink">Tempat/Tautan Asesmen</label>
+              <input type="text" class="form-control" id="tempatLink" placeholder="Masukkan Tempat/Tautan Asesmen" readonly>
             </div>
             <div class="form-group">
-              <label for="hasilMBKM">Hasil Kegiatan MBKM</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="hasilMBKM" required>
-                  <label class="custom-file-label" for="hasilMBKM">Pilih File</label>
-                </div>
-              </div>
+              <label for="mahasiswa">Mahasiswa</label>
+              <input type="text" class="form-control" id="mahasiswa" placeholder="Masukkan Mahasiswa" readonly>
             </div>
             <div class="form-group">
-              <label>Tanggal Mulai Kegiatan MBKM</label>
-                <div class="input-group date" id="mulaiMBKM" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#mulaiMBKM" placeholder="dd/mm/yyyy" required/>
-                    <div class="input-group-append" data-target="#mulaiMBKM" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
+              <label for="kajur">Ketua Jurusan</label>
+              <input type="text" class="form-control" id="kajur" placeholder="Masukkan Ketua Jurusan" readonly>
             </div>
             <div class="form-group">
-              <label>Tanggal Selesai Kegiatan MBKM</label>
-                <div class="input-group date" id="selesaiMBKM" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#selesaiMBKM" placeholder="dd/mm/yyyy" required/>
-                    <div class="input-group-append" data-target="#selesaiMBKM" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
+              <label for="kaprodi">Kepala Program Studi</label>
+              <input type="text" class="form-control" id="kaprodi" placeholder="Masukkan Kepala Program Studi" readonly>
             </div>
             <div class="form-group">
-              <label for="hasilMBKM">Dokumentasi Kegiatan MBKM</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="hasilMBKM" required>
-                  <label class="custom-file-label" for="hasilMBKM">Pilih File</label>
-                </div>
-              </div>
+              <label for="dosen1">Dosen Mata Kuliah 1</label>
+              <input type="text" class="form-control" id="dosen1" placeholder="Masukkan Dosen Mata Kuliah 1" readonly>
+            </div>
+            <div class="form-group">
+              <label for="dosen2">Dosen Mata Kuliah 2</label>
+              <input type="text" class="form-control" id="dosen2" placeholder="Masukkan Dosen Mata Kuliah 2" readonly>
+            </div>
+            <div class="form-group">
+              <label for="dosen3">Dosen Mata Kuliah 3</label>
+              <input type="text" class="form-control" id="dosen3" placeholder="Masukkan Dosen Mata Kuliah 3" readonly>
+            </div>
+            <div class="form-group">
+              <label for="dosen4">Dosen Mata Kuliah 4</label>
+              <input type="text" class="form-control" id="dosen4" placeholder="Masukkan Dosen Mata Kuliah 4" readonly>
+            </div>
+            <div class="form-group">
+              <label for="dosen5">Dosen Mata Kuliah 5</label>
+              <input type="text" class="form-control" id="dosen5" placeholder="Masukkan Dosen Mata Kuliah 5" readonly>
+            </div>
+            <div class="form-group">
+              <label for="dosen6">Dosen Mata Kuliah 6</label>
+              <input type="text" class="form-control" id="dosen6" placeholder="Masukkan Dosen Mata Kuliah 6" readonly>
+            </div>
+            <div class="form-group">
+              <label for="dosen7">Dosen Mata Kuliah 7</label>
+              <input type="text" class="form-control" id="dosen7" placeholder="Masukkan Dosen Mata Kuliah 7" readonly>
+            </div>
+            <div class="form-group">
+              <label for="dosen8">Dosen Mata Kuliah 8</label>
+              <input type="text" class="form-control" id="dosen8" placeholder="Masukkan Dosen Mata Kuliah 8" readonly>
             </div>
           </div>
-
+        </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Unggah Berkas</button>
-            <button type="submit" class="btn btn-danger">Batal</button>
+            <button type="submit" class="btn btn-primary">Kembali</button>
           </div>
         </form>
       </div>
@@ -241,6 +240,16 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<!-- DataTables  & Plugins -->
+<script src="{{ url_for ('static',filename='plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{url_for ('static',filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- ChartJS -->
@@ -263,13 +272,31 @@
 <script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
+
 <script>
-  $('#mulaiMBKM').datetimepicker({
-        format: 'DD/MM/YYYY'
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "dom": '<"toolbar">frtip'
     });
-    $('#selesaiMBKM').datetimepicker({
-        format: 'DD/MM/YYYY'
-    });
+
+    $('div.toolbar').html('<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Buat Jadwal</button>');
+    $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD/MM/YYYY HH:mm' });
+  });
+</script>
+<!-- Select2 -->
+<script src="{{ url_for ('static',filename='plugins/select2/js/select2.full.min.js') }}"></script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2();
+  });
 </script>
 </body>
 </html>

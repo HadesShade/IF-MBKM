@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
@@ -150,12 +153,12 @@
               <input type="email" class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" readonly required>
             </div>
             <div class="form-group">
-              <label for="nomorInduk">Nomor Induk</label>
-              <input type="text" class="form-control" id="nomorInduk" placeholder="Masukkan Nomor Induk" readonly required>
+              <label for="nomorInduk">Nomor Induk Mahasiswa</label>
+              <input type="text" class="form-control" id="nomorInduk" placeholder="Masukkan Nomor Induk Mahasiswa" readonly required>
             </div>
             <div class="form-group">
               <label for="programStudi">Program Studi</label>
-              <select class="form-control custom-select" id="programStudi" required>
+              <select class="form-control select2" id="programStudi" required>
                 <option value="" disabled selected>-- Pilih Program Studi --</option>
                 <option value="Prodi 1">Prodi 1</option>
                 <option value="Prodi 2">Prodi 2</option>
@@ -202,7 +205,7 @@
             <label for="matkul1">Mata Kuliah 1</label>
             <div class="form-group row" id="matkul1">
               <div class="col-3">
-                <select class="custom-select" id="kodeMatkul1" required>
+                <select class="form-control select2" id="kodeMatkul1" required>
                   <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
                   <option value="Kode 1">Kode 1</option>
                   <option value="Kode 2">Kode 2</option>
@@ -215,20 +218,10 @@
                 </select>
               </div>
               <div class="col-5">
-                <select class="custom-select" id="namaMatkul1" required>
-                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
-                  <option value="Nama 1">Nama 1</option>
-                  <option value="Nama 2">Nama 2</option>
-                  <option value="Nama 3">Nama 3</option>
-                  <option value="Nama 4">Nama 4</option>
-                  <option value="Nama 5">Nama 5</option>
-                  <option value="Nama 6">Nama 6</option>
-                  <option value="Nama 7">Nama 7</option>
-                  <option value="Nama 8">Nama 8</option>
-                </select>
+                <input type="text" class="form-control" id="namaMatkul1" placeholder="Masukkan Nama Mata Kuliah" readonly required>
               </div>
               <div class="col-4">
-                <select class="custom-select" id="dosenMatkul1" required>
+                <select class="form-control select2" id="dosenMatkul1" required>
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   <option value="Dosen 1">Dosen 1</option>
                   <option value="Dosen 2">Dosen 2</option>
@@ -241,10 +234,11 @@
                 </select>
                 </div>
             </div>
+
             <label for="matkul2">Mata Kuliah 2</label>
             <div class="form-group row" id="matkul2">
               <div class="col-3">
-                <select class="custom-select" id="kodeMatkul2">
+                <select class="form-control select2" id="kodeMatkul2">
                   <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
                   <option value="Kode 1">Kode 1</option>
                   <option value="Kode 2">Kode 2</option>
@@ -257,20 +251,10 @@
                 </select>
               </div>
               <div class="col-5">
-                <select class="custom-select" id="namaMatkul2">
-                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
-                  <option value="Nama 1">Nama 1</option>
-                  <option value="Nama 2">Nama 2</option>
-                  <option value="Nama 3">Nama 3</option>
-                  <option value="Nama 4">Nama 4</option>
-                  <option value="Nama 5">Nama 5</option>
-                  <option value="Nama 6">Nama 6</option>
-                  <option value="Nama 7">Nama 7</option>
-                  <option value="Nama 8">Nama 8</option>
-                </select>
+                <input type="text" class="form-control" id="namaMatkul2" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <select class="custom-select" id="dosenMatkul2">
+                <select class="form-control select2" id="dosenMatkul2">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   <option value="Dosen 1">Dosen 1</option>
                   <option value="Dosen 2">Dosen 2</option>
@@ -283,10 +267,11 @@
                 </select>
                 </div>
             </div>
+
             <label for="matkul3">Mata Kuliah 3</label>
             <div class="form-group row" id="matkul3">
               <div class="col-3">
-                <select class="custom-select" id="kodeMatkul3">
+                <select class="form-control select2" id="kodeMatkul3">
                   <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
                   <option value="Kode 1">Kode 1</option>
                   <option value="Kode 2">Kode 2</option>
@@ -299,20 +284,10 @@
                 </select>
               </div>
               <div class="col-5">
-                <select class="custom-select" id="namaMatkul3">
-                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
-                  <option value="Nama 1">Nama 1</option>
-                  <option value="Nama 2">Nama 2</option>
-                  <option value="Nama 3">Nama 3</option>
-                  <option value="Nama 4">Nama 4</option>
-                  <option value="Nama 5">Nama 5</option>
-                  <option value="Nama 6">Nama 6</option>
-                  <option value="Nama 7">Nama 7</option>
-                  <option value="Nama 8">Nama 8</option>
-                </select>
+                <input type="text" class="form-control" id="namaMatkul3" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <select class="custom-select" id="dosenMatkul3">
+                <select class="form-control select2" id="dosenMatkul3">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   <option value="Dosen 1">Dosen 1</option>
                   <option value="Dosen 2">Dosen 2</option>
@@ -325,10 +300,11 @@
                 </select>
                 </div>
             </div>
+
             <label for="matkul4">Mata Kuliah 4</label>
             <div class="form-group row" id="matkul4">
               <div class="col-3">
-                <select class="custom-select" id="kodeMatkul4">
+                <select class="form-control select2" id="kodeMatkul4">
                   <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
                   <option value="Kode 1">Kode 1</option>
                   <option value="Kode 2">Kode 2</option>
@@ -341,20 +317,10 @@
                 </select>
               </div>
               <div class="col-5">
-                <select class="custom-select" id="namaMatkul4">
-                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
-                  <option value="Nama 1">Nama 1</option>
-                  <option value="Nama 2">Nama 2</option>
-                  <option value="Nama 3">Nama 3</option>
-                  <option value="Nama 4">Nama 4</option>
-                  <option value="Nama 5">Nama 5</option>
-                  <option value="Nama 6">Nama 6</option>
-                  <option value="Nama 7">Nama 7</option>
-                  <option value="Nama 8">Nama 8</option>
-                </select>
+                <input type="text" class="form-control" id="namaMatkul4" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <select class="custom-select" id="dosenMatkul4">
+                <select class="form-control select2" id="dosenMatkul4">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   <option value="Dosen 1">Dosen 1</option>
                   <option value="Dosen 2">Dosen 2</option>
@@ -367,10 +333,11 @@
                 </select>
                 </div>
             </div>
+
             <label for="matkul5">Mata Kuliah 5</label>
             <div class="form-group row" id="matkul5">
               <div class="col-3">
-                <select class="custom-select" id="kodeMatkul5">
+                <select class="form-control select2" id="kodeMatkul5">
                   <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
                   <option value="Kode 1">Kode 1</option>
                   <option value="Kode 2">Kode 2</option>
@@ -383,20 +350,10 @@
                 </select>
               </div>
               <div class="col-5">
-                <select class="custom-select" id="namaMatkul5">
-                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
-                  <option value="Nama 1">Nama 1</option>
-                  <option value="Nama 2">Nama 2</option>
-                  <option value="Nama 3">Nama 3</option>
-                  <option value="Nama 4">Nama 4</option>
-                  <option value="Nama 5">Nama 5</option>
-                  <option value="Nama 6">Nama 6</option>
-                  <option value="Nama 7">Nama 7</option>
-                  <option value="Nama 8">Nama 8</option>
-                </select>
+                <input type="text" class="form-control" id="namaMatkul5" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <select class="custom-select" id="dosenMatkul5">
+                <select class="form-control select2" id="dosenMatkul5">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   <option value="Dosen 1">Dosen 1</option>
                   <option value="Dosen 2">Dosen 2</option>
@@ -409,10 +366,11 @@
                 </select>
                 </div>
             </div>
+
             <label for="matkul6">Mata Kuliah 6</label>
             <div class="form-group row" id="matkul6">
               <div class="col-3">
-                <select class="custom-select" id="kodeMatkul6">
+                <select class="form-control select2" id="kodeMatkul6">
                   <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
                   <option value="Kode 1">Kode 1</option>
                   <option value="Kode 2">Kode 2</option>
@@ -425,20 +383,10 @@
                 </select>
               </div>
               <div class="col-5">
-                <select class="custom-select" id="namaMatkul6">
-                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
-                  <option value="Nama 1">Nama 1</option>
-                  <option value="Nama 2">Nama 2</option>
-                  <option value="Nama 3">Nama 3</option>
-                  <option value="Nama 4">Nama 4</option>
-                  <option value="Nama 5">Nama 5</option>
-                  <option value="Nama 6">Nama 6</option>
-                  <option value="Nama 7">Nama 7</option>
-                  <option value="Nama 8">Nama 8</option>
-                </select>
+                <input type="text" class="form-control" id="namaMatkul6" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <select class="custom-select" id="dosenMatkul6">
+                <select class="form-control select2" id="dosenMatkul6">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   <option value="Dosen 1">Dosen 1</option>
                   <option value="Dosen 2">Dosen 2</option>
@@ -451,10 +399,11 @@
                 </select>
                 </div>
             </div>
+
             <label for="matkul7">Mata Kuliah 7</label>
             <div class="form-group row" id="matkul7">
               <div class="col-3">
-                <select class="custom-select" id="kodeMatkul7">
+                <select class="form-control select2" id="kodeMatkul7">
                   <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
                   <option value="Kode 1">Kode 1</option>
                   <option value="Kode 2">Kode 2</option>
@@ -467,20 +416,10 @@
                 </select>
               </div>
               <div class="col-5">
-                <select class="custom-select" id="namaMatkul7">
-                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
-                  <option value="Nama 1">Nama 1</option>
-                  <option value="Nama 2">Nama 2</option>
-                  <option value="Nama 3">Nama 3</option>
-                  <option value="Nama 4">Nama 4</option>
-                  <option value="Nama 5">Nama 5</option>
-                  <option value="Nama 6">Nama 6</option>
-                  <option value="Nama 7">Nama 7</option>
-                  <option value="Nama 8">Nama 8</option>
-                </select>
+                <input type="text" class="form-control" id="namaMatkul7" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <select class="custom-select" id="dosenMatkul7">
+                <select class="form-control select2" id="dosenMatkul7">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   <option value="Dosen 1">Dosen 1</option>
                   <option value="Dosen 2">Dosen 2</option>
@@ -493,10 +432,11 @@
                 </select>
                 </div>
             </div>
+
             <label for="matkul8">Mata Kuliah 8</label>
             <div class="form-group row" id="matkul8">
               <div class="col-3">
-                <select class="custom-select" id="kodeMatkul8">
+                <select class="form-control select2" id="kodeMatkul8">
                   <option value="" disabled selected>-- Pilih Kode Mata Kuliah --</option>
                   <option value="Kode 1">Kode 1</option>
                   <option value="Kode 2">Kode 2</option>
@@ -509,20 +449,10 @@
                 </select>
               </div>
               <div class="col-5">
-                <select class="custom-select" id="namaMatkul8">
-                  <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
-                  <option value="Nama 1">Nama 1</option>
-                  <option value="Nama 2">Nama 2</option>
-                  <option value="Nama 3">Nama 3</option>
-                  <option value="Nama 4">Nama 4</option>
-                  <option value="Nama 5">Nama 5</option>
-                  <option value="Nama 6">Nama 6</option>
-                  <option value="Nama 7">Nama 7</option>
-                  <option value="Nama 8">Nama 8</option>
-                </select>
+                <input type="text" class="form-control" id="namaMatkul8" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <select class="custom-select" id="dosenMatkul8">
+                <select class="form-control select2" id="dosenMatkul8">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   <option value="Dosen 1">Dosen 1</option>
                   <option value="Dosen 2">Dosen 2</option>
@@ -535,11 +465,13 @@
                 </select>
                 </div>
             </div>
+
           </div>
           <!-- /.card-body -->
 
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Ajukan</button>
+            <button type="submit" class="btn btn-danger">Batal</button>
           </div>
         </form>
       </div>
@@ -593,5 +525,13 @@
 <script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ url_for ('static',filename='plugins/select2/js/select2.full.min.js') }}"></script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2();
+  });
+</script>
 </body>
 </html>

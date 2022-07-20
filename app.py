@@ -40,6 +40,40 @@ def unggah_berkas_mhs():
 @app.route('/mahasiswa/lihat-berkas-mhs')
 def lihat_berkas_mhs():
 	return render_template('mahasiswa/lihat-berkas-mhs.html')
-	
 
+@app.route('/sekjur/index-sekjur')
+def index_sekjur():
+	return render_template('sekjur/index-sekjur.html')
+	
+@app.route('/sekjur/daftar-pengajuan-mbkm')
+def daftar_pengajuan_mbkm():
+	return render_template('sekjur/daftar-pengajuan-mbkm.html')
+
+@app.route('/sekjur/lihat-berkas-sekjur')
+def lihat_berkas_sekjur():
+	return render_template('sekjur/lihat-berkas-sekjur.html')
+
+@app.route('/sekjur/lihat-pengajuan-sekjur')
+def lihat_pengajuan_sekjur():
+	return render_template('sekjur/lihat-pengajuan-sekjur.html')
+
+@app.route('/sekjur/jadwal-asesmen-sekjur')
+def jadwal_asesmen_sekjur():
+	return render_template('sekjur/jadwal-asesmen-sekjur.html')
+
+@app.route('/sekjur/buat-asesmen-sekjur')
+def buat_asesmen_sekjur():
+	return render_template('sekjur/buat-asesmen-sekjur.html')
+
+@app.route('/sekjur/ubah-asesmen-sekjur')
+def ubah_asesmen_sekjur():
+	return render_template('sekjur/ubah-asesmen-sekjur.html')
+
+@app.route('/sekjur/lihat-asesmen-sekjur')
+def lihat_asesmen_sekjur():
+	return render_template('sekjur/lihat-asesmen-sekjur.html')
+
+@app.route('/sekjur/proses-asesmen-sekjur')
+def proses_asesmen_sekjur():
+	return render_template('sekjur/proses-asesmen-sekjur.html')
 
