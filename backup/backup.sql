@@ -30,7 +30,7 @@ CREATE TABLE `tbl_berkas_mbkm` (
   `tanggal_mulai_program` date NOT NULL,
   `tanggal_selesai_program` date NOT NULL,
   `dokumentasi_program` text NOT NULL,
-  `status_berkas` enum('Waiting','Rejected','Accepted') NOT NULL DEFAULT 'Waiting',
+  `status_berkas` enum('Belum Dikumpulkan','Dikumpulkan') NOT NULL DEFAULT 'Belum Dikumpulkan',
   PRIMARY KEY (`id_pengajuan`),
   CONSTRAINT `tbl_berkas_mbkm_ibfk_1` FOREIGN KEY (`id_pengajuan`) REFERENCES `tbl_pengajuan_mbkm` (`id_pengajuan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -355,4 +355,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-19 19:57:08
+-- Dump completed on 2022-07-20 14:38:54

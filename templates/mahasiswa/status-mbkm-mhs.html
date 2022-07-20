@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IF-MBKM | Beranda</title>
-
+  <title>IF-MBKM | Status Pengajuan MBKM</title>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -69,8 +72,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="/mahasiswa/index-mhs" class="nav-link active">
+          <li class="nav-item">
+            <a href="/mahasiswa/index-mhs" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Beranda
@@ -86,7 +89,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/mahasiswa/status-mbkm-mhs" class="nav-link">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-info-circle"></i>
               <p>
                 Status Pengajuan MBKM
@@ -123,11 +126,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Beranda</h1>
+            <h1 class="m-0">Status Pengajuan MBKM</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active"><a href="#">Beranda</a></li>
+              <li class="breadcrumb-item active"><a href="#">Status Pengajuan MBKM</a></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -136,71 +139,47 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content" style="background-color: #eee;">
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <img src="{{ url_for ('static',filename='dist/img/user1-128x128.jpg') }}" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">Full Name Here</h5>
-                  <p class="text-muted mb-1">Role Here</p>
-                  <p class="text-muted mb-4">Politeknik Negeri Batam</p>
-                </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Daftar Status Pengajuan MBKM</h3>
               </div>
-            </div>
-            <div class="col-lg-8">
-              <div class="card mb-4">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nama Lengkap</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nama Lengkap Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nomor Induk</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nomor Induk Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Alamat Surel</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Alamat Surel Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nomor Telepon</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nomor Telepon Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Alamat Rumah</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Alamat Rumah Here</p>
-                    </div>
-                  </div>
-                </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Nomor Pengajuan</th>
+                    <th>Nama Program MBKM</th>
+                    <th>Status Pengajuan</th>
+                    <th>Berkas Program MBKM</th>
+                    <th>Aksi</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>3311901049-22022022</td>
+                    <td>LO KMIPN IV</td>
+                    <td><p class="text-warning">🕐 Menunggu Disetujui</p></td>
+                    <td>
+                      <button type="button" class="btn btn-primary"><i class="fas fa-file"></i> Unggah Berkas</button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i> Lihat</button>
+                      <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                    </td>
+                  </tr>  
+                  </tfoot>
+                </table>
               </div>
+              <!-- /.card-body -->
             </div>
           </div>
         </div>
+      </div>
     </section>
     <!-- /.content -->
   </div>
@@ -229,6 +208,16 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<!-- DataTables  & Plugins -->
+<script src="{{ url_for ('static',filename='plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ url_for ('static',filename='plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{url_for ('static',filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- ChartJS -->
@@ -251,5 +240,20 @@
 <script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
+
+<script>
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IF-MBKM | Beranda</title>
+  <title>IF-MBKM | Unggah Berkas MBKM</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -69,8 +69,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="/mahasiswa/index-mhs" class="nav-link active">
+          <li class="nav-item">
+            <a href="/mahasiswa/index-mhs" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Beranda
@@ -86,7 +86,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/mahasiswa/status-mbkm-mhs" class="nav-link">
+            <a href="/mahasiswa/status-mbkm-mhs" class="nav-link active">
               <i class="nav-icon fas fa-info-circle"></i>
               <p>
                 Status Pengajuan MBKM
@@ -123,11 +123,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Beranda</h1>
+            <h1 class="m-0">Unggah Berkas MBKM</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active"><a href="#">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="/mahasiswa/status-mbkm-mhs">Status Pengajuan MBKM</a></li>
+              <li class="breadcrumb-item active">Unggah Berkas MBKM</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -136,71 +137,81 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content" style="background-color: #eee;">
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <img src="{{ url_for ('static',filename='dist/img/user1-128x128.jpg') }}" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">Full Name Here</h5>
-                  <p class="text-muted mb-1">Role Here</p>
-                  <p class="text-muted mb-4">Politeknik Negeri Batam</p>
+    <section class="content">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Unggah Berkas MBKM</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="idPengajuan">Nomor Pengajuan</label>
+              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly required>
+            </div>
+            <div class="form-group">
+              <label for="sertifikatMBKM">Sertifikat Kegiatan MBKM</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="sertifikatMBKM" required>
+                  <label class="custom-file-label" for="sertifikatMBKM">Pilih File</label>
                 </div>
               </div>
             </div>
-            <div class="col-lg-8">
-              <div class="card mb-4">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nama Lengkap</p>
+            <div class="form-group">
+              <label for="laporanMBKM">Laporan Kegiatan MBKM</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="laporanMBKM" required>
+                  <label class="custom-file-label" for="laporanMBKM">Pilih File</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="hasilMBKM">Hasil Kegiatan MBKM</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="hasilMBKM" required>
+                  <label class="custom-file-label" for="hasilMBKM">Pilih File</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tanggal Mulai Kegiatan MBKM</label>
+                <div class="input-group date" id="mulaiMBKM" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#mulaiMBKM" placeholder="dd/mm/yyyy" required/>
+                    <div class="input-group-append" data-target="#mulaiMBKM" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nama Lengkap Here</p>
+                </div>
+            </div>
+            <div class="form-group">
+              <label>Tanggal Selesai Kegiatan MBKM</label>
+                <div class="input-group date" id="selesaiMBKM" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#selesaiMBKM" placeholder="dd/mm/yyyy" required/>
+                    <div class="input-group-append" data-target="#selesaiMBKM" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nomor Induk</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nomor Induk Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Alamat Surel</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Alamat Surel Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Nomor Telepon</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Nomor Telepon Here</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Alamat Rumah</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">Alamat Rumah Here</p>
-                    </div>
-                  </div>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="hasilMBKM">Dokumentasi Kegiatan MBKM</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="hasilMBKM" required>
+                  <label class="custom-file-label" for="hasilMBKM">Pilih File</label>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
+          <!-- /.card-body -->
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Unggah Berkas</button>
+          </div>
+        </form>
+      </div>
     </section>
     <!-- /.content -->
   </div>
@@ -251,5 +262,13 @@
 <script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
+<script>
+  $('#mulaiMBKM').datetimepicker({
+        format: 'DD/MM/YYYY'
+    });
+    $('#selesaiMBKM').datetimepicker({
+        format: 'DD/MM/YYYY'
+    });
+</script>
 </body>
 </html>

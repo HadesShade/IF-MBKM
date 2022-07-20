@@ -20,6 +20,26 @@ def index_mhs():
 @app.route('/mahasiswa/ajukan-mbkm')
 def ajukan_mbkm():
 	return render_template('mahasiswa/ajukan-mbkm.html')
+
+@app.route('/mahasiswa/status-mbkm-mhs')
+def status_mbkm_mhs():
+	return render_template('mahasiswa/status-mbkm-mhs.html')
+
+@app.route('/mahasiswa/status-mbkm-mhs-detail')
+def status_mbkm_mhs_detail():
+	return render_template('mahasiswa/status-mbkm-mhs-detail.html')
+
+@app.route('/mahasiswa/jadwal-asesmen-mhs')
+def jadwal_asesmen_mhs():
+	return render_template('mahasiswa/jadwal-asesmen-mhs.html')
+
+@app.route('/mahasiswa/unggah-berkas-mhs')
+def unggah_berkas_mhs():
+	return render_template('mahasiswa/unggah-berkas-mhs.html')
+
+@app.route('/mahasiswa/lihat-berkas-mhs')
+def lihat_berkas_mhs():
+	return render_template('mahasiswa/lihat-berkas-mhs.html')
 	
 
 
