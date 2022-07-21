@@ -77,3 +77,23 @@ def lihat_asesmen_sekjur():
 def proses_asesmen_sekjur():
 	return render_template('sekjur/proses-asesmen-sekjur.html')
 
+@app.route('/dosen/index-dosen')
+def index_dosen():
+	return render_template('dosen/index-dosen.html')
+
+@app.route('/dosen/jadwal-asesmen-dosen')
+def jadwal_asesmen_dosen():
+	return render_template('dosen/jadwal-asesmen-dosen.html')
+
+@app.route('/dosen/lihat-pengajuan-dosen')
+def lihat_pengajuan_dosen():
+	return render_template('dosen/lihat-pengajuan-dosen.html')
+
+@app.route('/dosen/lihat-berkas-dosen')
+def lihat_berkas_dosen():
+	return render_template('dosen/lihat-berkas-dosen.html')
+
+@app.route('/dosen/lihat-asesmen-dosen')
+def lihat_asesmen_dosen():
+	return render_template('dosen/lihat-asesmen-dosen.html')
+
