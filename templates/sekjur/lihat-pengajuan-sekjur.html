@@ -140,32 +140,19 @@
           <div class="card-body">
             <div class="form-group">
               <label for="namaLengkap">Nama Lengkap</label>
-              <input type="email" class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" readonly required>
+              <input type="email" class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" readonly>
             </div>
             <div class="form-group">
               <label for="nomorInduk">Nomor Induk Mahasiswa</label>
-              <input type="text" class="form-control" id="nomorInduk" placeholder="Masukkan Nomor Induk" readonly required>
+              <input type="text" class="form-control" id="nomorInduk" placeholder="Masukkan Nomor Induk" readonly>
             </div>
             <div class="form-group">
               <label for="programStudi">Program Studi</label>
-              <select class="form-control custom-select" id="programStudi" disabled>
-                <option value="" disabled selected>-- Pilih Program Studi --</option>
-                <option value="Prodi 1">Prodi 1</option>
-                <option value="Prodi 2">Prodi 2</option>
-                <option value="Prodi 3">Prodi 3</option>
-                <option value="Prodi 4">Prodi 4</option>
-                <option value="Prodi 5">Prodi 5</option>
-                <option value="Prodi 6">Prodi 6</option>
-              </select>
+              <input type="text" class="form-control" id="programStudi" placeholder="Masukkan Program Studi" readonly>
             </div>
             <div class="form-group">
-              <label for="angkatan">Tahun Angkatan</label>
-              <input type="number" min="0" class="form-control" id="angkatan" placeholder="Masukkan Tahun Angkatan" readonly>
-              <script type="text/javascript">
-              window.onload = function() {
-                document.getElementById("angkatan").value = new Date().getFullYear();
-              };
-              </script> 
+              <label for="tahunAngkatan">Tahun Angkatan</label>
+              <input type="text" class="form-control" id="tahunAngkatan" placeholder="Masukkan Tahun Angkatan" readonly>
             </div>
             <div class="form-group">
               <label for="namaMBKM">Nama Program MBKM</label>
@@ -181,110 +168,106 @@
             </div>
             <div class="form-group">
               <label for="semesterKlaim">Semester Klaim MBKM</label>
-              <input type="number" min="1" value="1" class="form-control" id="semesterKlaim" placeholder="Masukkan Semester Klaim MBKM" readonly>
+              <input type="text" class="form-control" id="semesterKlaim" placeholder="Masukkan Semester Klaim MBKM" readonly>
             </div>
             <div class="form-group">
-              <label for="buktiMBKM">Bukti Penerimaan Program MBKM</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="text" class="form-control" id="buktiMBKM" placeholder="Link File Bukti MBKM" readonly>
-                </div>
-              </div>
+              <label for="linkBukti">Bukti Penerimaan MBKM</label>
+              <input type="text" class="form-control" id="linkBukti" placeholder="Masukkan Link Bukti Penerimaan MBKM" readonly>
             </div>
             <label for="matkul1">Mata Kuliah 1</label>
             <div class="form-group row" id="matkul1">
-              <div class="col-3">
-                <input type="text" class="form-control" id="kodeMatkul1" placeholder="Masukkan Kode Mata Kuliah" readonly>
-              </div>
               <div class="col-5">
                 <input type="text" class="form-control" id="namaMatkul1" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="dosenMatkul1" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
+              <div class="col-3">
+                <input type="text" class="form-control" id="jumlahSKS1" placeholder="Masukkan SKS Mata Kuliah" readonly>
+              </div>
             </div>
             <label for="matkul2">Mata Kuliah 2</label>
             <div class="form-group row" id="matkul2">
-              <div class="col-3">
-                <input type="text" class="form-control" id="kodeMatkul2" placeholder="Masukkan Kode Mata Kuliah" readonly>
-              </div>
               <div class="col-5">
                 <input type="text" class="form-control" id="namaMatkul2" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="dosenMatkul2" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
+              <div class="col-3">
+                <input type="text" class="form-control" id="jumlahSKS2" placeholder="Masukkan SKS Mata Kuliah" readonly>
+              </div>
             </div>
             <label for="matkul3">Mata Kuliah 3</label>
             <div class="form-group row" id="matkul3">
-              <div class="col-3">
-                <input type="text" class="form-control" id="kodeMatkul3" placeholder="Masukkan Kode Mata Kuliah" readonly>
-              </div>
               <div class="col-5">
                 <input type="text" class="form-control" id="namaMatkul3" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="dosenMatkul3" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
+              <div class="col-3">
+                <input type="text" class="form-control" id="jumlahSKS3" placeholder="Masukkan SKS Mata Kuliah" readonly>
+              </div>
             </div>
             <label for="matkul4">Mata Kuliah 4</label>
             <div class="form-group row" id="matkul4">
-              <div class="col-3">
-                <input type="text" class="form-control" id="kodeMatkul4" placeholder="Masukkan Kode Mata Kuliah" readonly>
-              </div>
               <div class="col-5">
                 <input type="text" class="form-control" id="namaMatkul4" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="dosenMatkul4" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
+              <div class="col-3">
+                <input type="text" class="form-control" id="jumlahSKS4" placeholder="Masukkan SKS Mata Kuliah" readonly>
+              </div>
             </div>
             <label for="matkul5">Mata Kuliah 5</label>
             <div class="form-group row" id="matkul5">
-              <div class="col-3">
-                <input type="text" class="form-control" id="kodeMatkul5" placeholder="Masukkan Kode Mata Kuliah" readonly>
-              </div>
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul5" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="kodeMatkul5" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul5" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul5" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <input type="text" class="form-control" id="jumlahSKS5" placeholder="Masukkan SKS Mata Kuliah" readonly>
               </div>
             </div>
             <label for="matkul6">Mata Kuliah 6</label>
             <div class="form-group row" id="matkul6">
-              <div class="col-3">
-                <input type="text" class="form-control" id="kodeMatkul6" placeholder="Masukkan Kode Mata Kuliah" readonly>
-              </div>
               <div class="col-5">
                 <input type="text" class="form-control" id="namaMatkul6" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="dosenMatkul6" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
+              <div class="col-3">
+                <input type="text" class="form-control" id="jumlahSKS6" placeholder="Masukkan SKS Mata Kuliah" readonly>
+              </div>
             </div>
             <label for="matkul7">Mata Kuliah 7</label>
             <div class="form-group row" id="matkul7">
-              <div class="col-3">
-                <input type="text" class="form-control" id="kodeMatkul7" placeholder="Masukkan Kode Mata Kuliah" readonly>
-              </div>
               <div class="col-5">
                 <input type="text" class="form-control" id="namaMatkul7" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul7" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosennamaMatkul7" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <input type="text" class="form-control" id="jumlahSKS7" placeholder="Masukkan SKS Mata Kuliah" readonly>
               </div>
             </div>
             <label for="matkul8">Mata Kuliah 8</label>
             <div class="form-group row" id="matkul8">
-              <div class="col-3">
-                <input type="text" class="form-control" id="kodeMatkul8" placeholder="Masukkan Kode Mata Kuliah" readonly>
-              </div>
               <div class="col-5">
                 <input type="text" class="form-control" id="namaMatkul8" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="dosenMatkul8" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <input type="text" class="form-control" id="jumlahSKS8" placeholder="Masukkan SKS Mata Kuliah" readonly>
               </div>
             </div>
           </div>

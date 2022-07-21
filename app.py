@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, abort
 from flask_mysqldb import MySQL
-import hashlib, MySQLdb.cursors
+import hashlib, MySQLdb.cursors, datetime
 
 app = Flask(__name__)
 app.secret_key = "XiCgaXUiemeLaPgCPx5fvcYCMFeuEH1fULZmAmYkuy1HWkCgtVA9Qbvb4qpTGt1i"
@@ -13,6 +13,13 @@ mysql = MySQL(app)
 
 def encrypt_password(passText):
 	return hashlib.sha512(passText.encode()).hexdigest()
+
+def generate_mbkm_id(nomorInduk):
+	currDate = datetime.datetime.now()
+	return nomorInduk + '-' + currDate.day + currDate.month + currDate.year
+
+def generate_asesmen_id(mbkmID, asesmenDate):
+	return mbkmID + '-' + asesmenDate
 
 @app.route('/')
 def default():
@@ -85,7 +92,37 @@ def index_mhs():
 
 @app.route('/mahasiswa/ajukan-mbkm')
 def ajukan_mbkm():
-	return render_template('mahasiswa/ajukan-mbkm.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role'):
+		if session['role'] == 'Mahasiswa':
+			nomor_induk = session['nomor_induk']
+			cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute("SELECT * FROM tbl_user where nomor_induk=%s", [nomor_induk])
+			account_detail = cursor.fetchone()
+
+			if account_detail:
+				full_name = account_detail['nama']
+				program_studi = ""
+				cursor.execute("SELECT * from tbl_prodi_if")
+				for item in cursor.fetchall():
+					program_studi += f"<option value='{item['kode_prodi']}'>{item['kode_prodi']  + ' - ' + item['jenjang'] + ' ' + item['nama_prodi']}</option>"
+				
+				mata_kuliah=""
+				cursor.execute("SELECT * from tbl_mata_kuliah")
+				for item in cursor.fetchall():
+					mata_kuliah += f"<option value='{item['kode_matkul']}'>{item['kode_matkul']  + ' - ' + item['nama_matkul']}</option>"
+				
+				dosen_list = ""
+				cursor.execute("SELECT * from tbl_user where NOT role='Mahasiswa'")
+				for item in cursor.fetchall():
+					dosen_list += f"<option value='{item['nomor_induk']}'>{item['nomor_induk']  + ' - ' + item['nama']}</option>"
+
+				return render_template('mahasiswa/ajukan-mbkm.html', nomor_induk=nomor_induk, full_name=full_name, program_studi=program_studi, mata_kuliah=mata_kuliah, dosen_list=dosen_list)
+			else:
+				return redirect('/logout')
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 
 @app.route('/mahasiswa/status-mbkm-mhs')
 def status_mbkm_mhs():
