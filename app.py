@@ -97,3 +97,23 @@ def lihat_berkas_dosen():
 def lihat_asesmen_dosen():
 	return render_template('dosen/lihat-asesmen-dosen.html')
 
+@app.route('/kaprodi/index-kaprodi')
+def index_kaprodi():
+	return render_template('kaprodi/index-kaprodi.html')
+
+@app.route('/kaprodi/jadwal-asesmen-kaprodi')
+def jadwal_asesmen_kaprodi():
+	return render_template('kaprodi/jadwal-asesmen-kaprodi.html')
+
+@app.route('/kaprodi/lihat-pengajuan-kaprodi')
+def lihat_pengajuan_kaprodi():
+	return render_template('kaprodi/lihat-pengajuan-kaprodi.html')
+
+@app.route('/kaprodi/lihat-berkas-kaprodi')
+def lihat_berkas_kaprodi():
+	return render_template('kaprodi/lihat-berkas-kaprodi.html')
+
+@app.route('/kaprodi/lihat-asesmen-kaprodi')
+def lihat_asesmen_kaprodi():
+	return render_template('kaprodi/lihat-asesmen-kaprodi.html')
+
