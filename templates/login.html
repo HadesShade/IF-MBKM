@@ -24,9 +24,9 @@
     <div class="card-body">
       <p class="login-box-msg">Portal IF-MBKM - Politeknik Negeri Batam</p>
 
-      <form action="../../index3.html" method="post">
+      <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Nama Akun Pengguna">
+          <input type="text" id="username" name="username" class="form-control" placeholder="Nama Akun Pengguna">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user-alt"></span>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Kata Sandi">
+          <input type="password" id="password" name="password" class="form-control" placeholder="Kata Sandi">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -60,6 +60,7 @@
   <!-- /.card -->
 </div>
 <!-- /.login-box -->
+<div><p class="text text-danger text-center">{{ invalid }}</p></div>
 
 <!-- jQuery -->
 <script src="{{ url_for ('static',filename='plugins/jquery/jquery.min.js') }}"></script>

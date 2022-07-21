@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session, abort
 from flask_mysqldb import MySQL
+import hashlib, MySQLdb.cursors
 
 app = Flask(__name__)
+app.secret_key = "XiCgaXUiemeLaPgCPx5fvcYCMFeuEH1fULZmAmYkuy1HWkCgtVA9Qbvb4qpTGt1i"
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'mbkm_sql'
 app.config['MYSQL_PASSWORD'] = 'Pa$$worD'
@@ -9,13 +11,77 @@ app.config['MYSQL_DB'] = 'mbkm_db'
 app.config['MYSQL_PORT'] = 3306
 mysql = MySQL(app)
 
-@app.route('/')
-def login():
-	return render_template('login.html')
+def encrypt_password(passText):
+	return hashlib.sha512(passText.encode()).hexdigest()
 
-@app.route('/mahasiswa/index-mhs')
+@app.route('/')
+def default():
+	if session.get('nomor_induk') and session.get('username') and session.get('role'):
+		if session['role'] == 'Mahasiswa':
+			return redirect('/mahasiswa/index-mhs')
+		elif session['role'] == 'Sekretaris Jurusan':
+			return redirect('/sekjur/index-sekjur')
+		elif session['role'] == 'Ketua Jurusan':
+			return redirect('/kajur/index-kajur')
+		elif session['role'] == 'Kepala Prodi':
+			return redirect('/kaprodi/index-kaprodi')
+		elif session['role'] == 'Dosen':
+			return redirect('/dosen/index-dosen')
+	
+	return redirect('/login')
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+	invalid = ""
+	if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+		username = request.form['username']
+		password = request.form['password']
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		cursor.execute("SELECT * FROM tbl_user where username=%s AND password=%s", (username, encrypt_password(password)))
+		account = cursor.fetchone()
+		if account:
+			session['nomor_induk'] = account['nomor_induk']
+			session['username'] = account['username']
+			session['role'] = account['role']
+
+			if session['role'] == 'Mahasiswa':
+				return redirect('/mahasiswa/index-mhs')
+			elif session['role'] == 'Sekretaris Jurusan':
+				return redirect('/sekjur/index-sekjur')
+			elif session['role'] == 'Ketua Jurusan':
+				return redirect('/kajur/index-kajur')
+			elif session['role'] == 'Kepala Prodi':
+				return redirect('/kaprodi/index-kaprodi')
+			elif session['role'] == 'Dosen':
+				return redirect('/dosen/index-dosen')
+		else:
+			invalid = "Login Salah! Silahkan Periksa Kredensial Anda!"
+		
+	return render_template('login.html', invalid=invalid)
+		
+
+@app.route('/mahasiswa/index-mhs', methods=['GET'])
 def index_mhs():
-	return render_template('mahasiswa/index-mhs.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role'):
+		if session['role'] == 'Mahasiswa':
+			nomor_induk = session['nomor_induk']
+			cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute("SELECT * FROM tbl_user where nomor_induk=%s", [nomor_induk])
+			account_detail = cursor.fetchone()
+
+			if account_detail:
+				full_name = account_detail['nama']
+				user_role = account_detail['role']
+				user_email = account_detail['email']
+				telp_number = account_detail['telp']
+				user_address = account_detail['alamat']
+				return render_template('mahasiswa/index-mhs.html', nomor_induk=nomor_induk, full_name=full_name, user_role=user_role, user_email=user_email, telp_number=telp_number, user_address=user_address)
+			else:
+				return redirect('/logout')
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 
 @app.route('/mahasiswa/ajukan-mbkm')
 def ajukan_mbkm():
@@ -43,7 +109,26 @@ def lihat_berkas_mhs():
 
 @app.route('/sekjur/index-sekjur')
 def index_sekjur():
-	return render_template('sekjur/index-sekjur.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role'):
+		if session['role'] == 'Sekretaris Jurusan':
+			nomor_induk = session['nomor_induk']
+			cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute("SELECT * FROM tbl_user where nomor_induk=%s", [nomor_induk])
+			account_detail = cursor.fetchone()
+
+			if account_detail:
+				full_name = account_detail['nama']
+				user_role = account_detail['role']
+				user_email = account_detail['email']
+				telp_number = account_detail['telp']
+				user_address = account_detail['alamat']
+				return render_template('sekjur/index-sekjur.html', nomor_induk=nomor_induk, full_name=full_name, user_role=user_role, user_email=user_email, telp_number=telp_number, user_address=user_address)
+			else:
+				return redirect('/logout')
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 	
 @app.route('/sekjur/daftar-pengajuan-mbkm')
 def daftar_pengajuan_mbkm():
@@ -79,7 +164,26 @@ def proses_asesmen_sekjur():
 
 @app.route('/dosen/index-dosen')
 def index_dosen():
-	return render_template('dosen/index-dosen.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role'):
+		if session['role'] == 'Dosen':
+			nomor_induk = session['nomor_induk']
+			cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute("SELECT * FROM tbl_user where nomor_induk=%s", [nomor_induk])
+			account_detail = cursor.fetchone()
+
+			if account_detail:
+				full_name = account_detail['nama']
+				user_role = account_detail['role']
+				user_email = account_detail['email']
+				telp_number = account_detail['telp']
+				user_address = account_detail['alamat']
+				return render_template('dosen/index-dosen.html', nomor_induk=nomor_induk, full_name=full_name, user_role=user_role,user_email=user_email, telp_number=telp_number, user_address=user_address)
+			else:
+				return redirect('/logout')
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 
 @app.route('/dosen/jadwal-asesmen-dosen')
 def jadwal_asesmen_dosen():
@@ -99,7 +203,26 @@ def lihat_asesmen_dosen():
 
 @app.route('/kaprodi/index-kaprodi')
 def index_kaprodi():
-	return render_template('kaprodi/index-kaprodi.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role'):
+		if session['role'] == 'Kepala Prodi':
+			nomor_induk = session['nomor_induk']
+			cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute("SELECT * FROM tbl_user where nomor_induk=%s", [nomor_induk])
+			account_detail = cursor.fetchone()
+
+			if account_detail:
+				full_name = account_detail['nama']
+				user_role = account_detail['role']
+				user_email = account_detail['email']
+				telp_number = account_detail['telp']
+				user_address = account_detail['alamat']
+				return render_template('kaprodi/index-kaprodi.html', nomor_induk=nomor_induk, full_name=full_name, user_role=user_role,user_email=user_email, telp_number=telp_number, user_address=user_address)
+			else:
+				return redirect('/logout')
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 
 @app.route('/kaprodi/jadwal-asesmen-kaprodi')
 def jadwal_asesmen_kaprodi():
@@ -119,7 +242,26 @@ def lihat_asesmen_kaprodi():
 
 @app.route('/kajur/index-kajur')
 def index_kajur():
-	return render_template('kajur/index-kajur.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role'):
+		if session['role'] == 'Ketua Jurusan':
+			nomor_induk = session['nomor_induk']
+			cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute("SELECT * FROM tbl_user where nomor_induk=%s", [nomor_induk])
+			account_detail = cursor.fetchone()
+
+			if account_detail:
+				full_name = account_detail['nama']
+				user_role = account_detail['role']
+				user_email = account_detail['email']
+				telp_number = account_detail['telp']
+				user_address = account_detail['alamat']
+				return render_template('kajur/index-kajur.html', nomor_induk=nomor_induk, full_name=full_name, user_role=user_role,user_email=user_email, telp_number=telp_number, user_address=user_address)
+			else:
+				return redirect('/logout')
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 
 @app.route('/kajur/jadwal-asesmen-kajur')
 def jadwal_asesmen_kajur():
@@ -136,4 +278,11 @@ def lihat_berkas_kajur():
 @app.route('/kajur/lihat-asesmen-kajur')
 def lihat_asesmen_kajur():
 	return render_template('kajur/lihat-asesmen-kajur.html')
+
+@app.route('/logout')
+def logout():
+	session.pop('nomor_induk', None)
+	session.pop('username', None)
+	session.pop('role', None)
+	return redirect('/')
 
