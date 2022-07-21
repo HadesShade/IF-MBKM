@@ -117,3 +117,23 @@ def lihat_berkas_kaprodi():
 def lihat_asesmen_kaprodi():
 	return render_template('kaprodi/lihat-asesmen-kaprodi.html')
 
+@app.route('/kajur/index-kajur')
+def index_kajur():
+	return render_template('kajur/index-kajur.html')
+
+@app.route('/kajur/jadwal-asesmen-kajur')
+def jadwal_asesmen_kajur():
+	return render_template('kajur/jadwal-asesmen-kajur.html')
+
+@app.route('/kajur/lihat-pengajuan-kajur')
+def lihat_pengajuan_kajur():
+	return render_template('kajur/lihat-pengajuan-kajur.html')
+
+@app.route('/kajur/lihat-berkas-kajur')
+def lihat_berkas_kajur():
+	return render_template('kajur/lihat-berkas-kajur.html')
+
+@app.route('/kajur/lihat-asesmen-kajur')
+def lihat_asesmen_kajur():
+	return render_template('kajur/lihat-asesmen-kajur.html')
+
