@@ -146,7 +146,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form enctype="multipart/form-data">
           <div class="card-body">
             <div class="form-group">
               <label for="namaLengkap">Nama Lengkap</label>
@@ -196,12 +196,12 @@
                   <label class="custom-file-label" for="buktiMBKM">Pilih File</label>
                 </div>
               </div>
-              <p class="text text-danger">Ekstensi File : *.jpg, *.png, *.pdf, *.doc, *.docx, dan *.zip</p>
+              <p class="text text-danger">Ekstensi File : *.jpg, *.png, *.pdf, *.doc, *.docx, dan *.zip. Ukuran Maksimal : 5 MB</p>
             </div>
             <label for="matkul1">Mata Kuliah 1</label>
             <div class="form-group row" id="matkul1">
               <div class="col-5">
-                <select class="form-control select2" id="namaMatkul1" required>
+                <select class="form-control select2" id="namaMatkul1" required onchange="getSKS('1')">
                   <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                   {{ mata_kuliah | safe}}
                 </select>
@@ -219,7 +219,7 @@
             <label for="matkul2">Mata Kuliah 2</label>
             <div class="form-group row" id="matkul2">
               <div class="col-5">
-                <select class="form-control select2" id="namaMatkul2">
+                <select class="form-control select2" id="namaMatkul2" onchange="getSKS('2')">
                   <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                   {{ mata_kuliah | safe}}
                 </select>
@@ -237,7 +237,7 @@
             <label for="matkul3">Mata Kuliah 3</label>
             <div class="form-group row" id="matkul3">
               <div class="col-5">
-                <select class="form-control select2" id="namaMatkul3">
+                <select class="form-control select2" id="namaMatkul3" onchange="getSKS('3')">
                   <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                   {{ mata_kuliah | safe}}
                 </select>
@@ -255,7 +255,7 @@
               <label for="matkul4">Mata Kuliah 4</label>
               <div class="form-group row" id="matkul4">
                 <div class="col-5">
-                  <select class="form-control select2" id="namaMatkul4">
+                  <select class="form-control select2" id="namaMatkul4" onchange="getSKS('4')">
                     <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                     {{ mata_kuliah | safe}}
                   </select>
@@ -273,7 +273,7 @@
                 <label for="matkul5">Mata Kuliah 5</label>
                 <div class="form-group row" id="matkul5">
                   <div class="col-5">
-                    <select class="form-control select2" id="namaMatkul5">
+                    <select class="form-control select2" id="namaMatkul5" onchange="getSKS('5')">
                       <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                       {{ mata_kuliah | safe}}
                     </select>
@@ -291,7 +291,7 @@
                   <label for="matkul6">Mata Kuliah 6</label>
                   <div class="form-group row" id="matkul6">
                     <div class="col-5">
-                      <select class="form-control select2" id="namaMatkul6">
+                      <select class="form-control select2" id="namaMatkul6" onchange="getSKS('6')">
                         <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                         {{ mata_kuliah | safe}}
                       </select>
@@ -309,7 +309,7 @@
                     <label for="matkul7">Mata Kuliah 7</label>
                     <div class="form-group row" id="matkul7">
                       <div class="col-5">
-                        <select class="form-control select2" id="namaMatkul7">
+                        <select class="form-control select2" id="namaMatkul7" onchange="getSKS('7')">
                           <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                           {{ mata_kuliah | safe}}
                         </select>
@@ -327,7 +327,7 @@
                       <label for="matkul8">Mata Kuliah 8</label>
                       <div class="form-group row" id="matkul8">
                         <div class="col-5">
-                          <select class="form-control select2" id="namaMatkul8">
+                          <select class="form-control select2" id="namaMatkul8" onchange="getSKS('8')">
                             <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                             {{ mata_kuliah | safe}}
                           </select>
@@ -409,5 +409,22 @@
     $('.select2').select2();
   });
 </script>
+
+<script type="text/javascript">
+  function getSKS(num) {
+    var a = document.getElementById('namaMatkul'+num).value;
+    $.ajax({
+        url: '/get_sks',
+        type: "POST",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: "kode_matkul="+a,
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById('jumlahSKS'+num).value = data.jumlah_sks;
+        }
+    });
+  }
+</script>
+
 </body>
 </html>

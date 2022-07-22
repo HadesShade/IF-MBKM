@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session, abort
+from flask import Flask, render_template, request, redirect, url_for, session, abort, jsonify
 from flask_mysqldb import MySQL
 import hashlib, MySQLdb.cursors, datetime
+from werkzeug.utils import secure_filename
+
+allowed_extensions = {'jpg', 'png', 'pdf', 'doc', 'docx', 'zip'}
 
 app = Flask(__name__)
 app.secret_key = "XiCgaXUiemeLaPgCPx5fvcYCMFeuEH1fULZmAmYkuy1HWkCgtVA9Qbvb4qpTGt1i"
@@ -9,6 +12,8 @@ app.config['MYSQL_USER'] = 'mbkm_sql'
 app.config['MYSQL_PASSWORD'] = 'Pa$$worD'
 app.config['MYSQL_DB'] = 'mbkm_db'
 app.config['MYSQL_PORT'] = 3306
+app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1000 * 1000
 mysql = MySQL(app)
 
 def encrypt_password(passText):
@@ -322,4 +327,22 @@ def logout():
 	session.pop('username', None)
 	session.pop('role', None)
 	return redirect('/')
+
+@app.route('/get_sks', methods=['POST'])
+def get_sks():
+	if request.method == 'POST' and 'kode_matkul' in request.form:
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		cursor.execute("SELECT * FROM tbl_mata_kuliah WHERE kode_matkul=%s", [request.form['kode_matkul']])
+		matkul_data = cursor.fetchone()
+		if matkul_data:
+			return jsonify(jumlah_sks=matkul_data['jumlah_sks'])
+		else:
+			return jsonify(jumlah_sks=None)
+	else:
+		return jsonify(jumlah_sks=None)
+
+
+
+
+
 
