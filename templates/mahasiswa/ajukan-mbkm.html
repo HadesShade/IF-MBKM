@@ -146,26 +146,26 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form enctype="multipart/form-data">
+        <form enctype="multipart/form-data" method="POST" action="">
           <div class="card-body">
             <div class="form-group">
               <label for="namaLengkap">Nama Lengkap</label>
-              <input type="email" class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" value="{{ full_name }}" readonly required>
+              <input type="email" class="form-control" id="namaLengkap" name="namaLengkap" placeholder="Masukkan Nama Lengkap" value="{{ full_name }}" readonly required>
             </div>
             <div class="form-group">
               <label for="nomorInduk">Nomor Induk Mahasiswa</label>
-              <input type="text" class="form-control" id="nomorInduk" placeholder="Masukkan Nomor Induk Mahasiswa" value="{{ nomor_induk }}" readonly required>
+              <input type="text" class="form-control" id="nomorInduk" name="nomorInduk" placeholder="Masukkan Nomor Induk Mahasiswa" value="{{ nomor_induk }}" readonly required>
             </div>
             <div class="form-group">
               <label for="programStudi">Program Studi</label>
-              <select class="form-control select2" id="programStudi" required>
+              <select class="form-control select2" id="programStudi" name="programStudi" required>
                 <option value="" disabled selected>-- Pilih Program Studi --</option>
                 {{ program_studi | safe}}
               </select>
             </div>
             <div class="form-group">
               <label for="angkatan">Tahun Angkatan</label>
-              <input type="number" min="0" class="form-control" id="angkatan" placeholder="Masukkan Tahun Angkatan" required>
+              <input type="number" min="0" class="form-control" id="angkatan" name="angkatan" placeholder="Masukkan Tahun Angkatan" required>
               <script type="text/javascript">
               window.onload = function() {
                 document.getElementById("angkatan").value = new Date().getFullYear();
@@ -174,180 +174,181 @@
             </div>
             <div class="form-group">
               <label for="namaMBKM">Nama Program MBKM</label>
-              <input type="text" class="form-control" id="namaMBKM" placeholder="Masukkan Nama Program MBKM" required>
+              <input type="text" class="form-control" id="namaMBKM" name="namaMBKM" placeholder="Masukkan Nama Program MBKM" required>
             </div>
             <div class="form-group">
               <label for="jenisMBKM">Jenis Program MBKM</label>
-              <input type="text" class="form-control" id="jenisMBKM" placeholder="Masukkan Jenis Program MBKM" required>
+              <input type="text" class="form-control" id="jenisMBKM" name="jenisMBKM" placeholder="Masukkan Jenis Program MBKM" required>
             </div>
             <div class="form-group">
               <label for="tempatMBKM">Tempat Program MBKM</label>
-              <input type="text" class="form-control" id="tempatMBKM" placeholder="Masukkan Tempat Program MBKM" required>
+              <input type="text" class="form-control" id="tempatMBKM" name="tempatMBKM" placeholder="Masukkan Tempat Program MBKM" required>
             </div>
             <div class="form-group">
               <label for="semesterKlaim">Semester Klaim MBKM</label>
-              <input type="number" min="1" value="1" class="form-control" id="semesterKlaim" placeholder="Masukkan Semester Klaim MBKM" required>
+              <input type="number" min="1" value="1" class="form-control" id="semesterKlaim" name="semesterKlaim" placeholder="Masukkan Semester Klaim MBKM" required>
             </div>
             <div class="form-group">
               <label for="buktiMBKM">Bukti Penerimaan Program MBKM</label>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="buktiMBKM" required>
+                  <input type="file" class="custom-file-input" id="buktiMBKM" name="buktiMBKM" required>
                   <label class="custom-file-label" for="buktiMBKM">Pilih File</label>
                 </div>
               </div>
               <p class="text text-danger">Ekstensi File : *.jpg, *.png, *.pdf, *.doc, *.docx, dan *.zip. Ukuran Maksimal : 5 MB</p>
             </div>
             <label for="matkul1">Mata Kuliah 1</label>
-            <div class="form-group row" id="matkul1">
+            <div class="form-group row" id="matkul1" name="matkul1">
               <div class="col-5">
-                <select class="form-control select2" id="namaMatkul1" required onchange="getSKS('1')">
+                <select class="form-control select2" id="namaMatkul1" name="namaMatkul1" required onchange="getSKS('1')">
                   <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                   {{ mata_kuliah | safe}}
                 </select>
               </div>
               <div class="col-4">
-                <select class="form-control select2" id="dosenMatkul1" required>
+                <select class="form-control select2" id="dosenMatkul1" name="dosenMatkul1" required>
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   {{ dosen_list | safe}}
                 </select>
                 </div>
                 <div class="col-3">
-                  <input type="text" class="form-control" id="jumlahSKS1" placeholder="Masukkan SKS Mata Kuliah" readonly required>
+                  <input type="text" class="form-control" id="jumlahSKS1" name="jumlahSKS1" placeholder="Masukkan SKS Mata Kuliah" readonly required>
                 </div>
               </div>
             <label for="matkul2">Mata Kuliah 2</label>
-            <div class="form-group row" id="matkul2">
+            <div class="form-group row" id="matkul2" name="matkul2">
               <div class="col-5">
-                <select class="form-control select2" id="namaMatkul2" onchange="getSKS('2')">
+                <select class="form-control select2" id="namaMatkul2" name="namaMatkul2" onchange="getSKS('2')">
                   <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                   {{ mata_kuliah | safe}}
                 </select>
               </div>
               <div class="col-4">
-                <select class="form-control select2" id="dosenMatkul2">
+                <select class="form-control select2" id="dosenMatkul2" name="dosenMatkul2">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   {{ dosen_list | safe}}
                 </select>
                 </div>
                 <div class="col-3">
-                  <input type="text" class="form-control" id="jumlahSKS2" placeholder="Masukkan SKS Mata Kuliah" readonly>
+                  <input type="text" class="form-control" id="jumlahSKS2" name="jumlahSKS2" placeholder="Masukkan SKS Mata Kuliah" readonly>
                 </div>
               </div>
             <label for="matkul3">Mata Kuliah 3</label>
-            <div class="form-group row" id="matkul3">
+            <div class="form-group row" id="matkul3" name="matkul3">
               <div class="col-5">
-                <select class="form-control select2" id="namaMatkul3" onchange="getSKS('3')">
+                <select class="form-control select2" id="namaMatkul3" name="namaMatkul3" onchange="getSKS('3')">
                   <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                   {{ mata_kuliah | safe}}
                 </select>
               </div>
               <div class="col-4">
-                <select class="form-control select2" id="dosenMatkul3">
+                <select class="form-control select2" id="dosenMatkul3" name="dosenMatkul3">
                   <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                   {{ dosen_list | safe}}
                 </select>
                 </div>
                 <div class="col-3">
-                  <input type="text" class="form-control" id="jumlahSKS3" placeholder="Masukkan SKS Mata Kuliah" readonly>
+                  <input type="text" class="form-control" id="jumlahSKS3" name="jumlahSKS3" placeholder="Masukkan SKS Mata Kuliah" readonly>
                 </div>
               </div>
               <label for="matkul4">Mata Kuliah 4</label>
-              <div class="form-group row" id="matkul4">
+              <div class="form-group row" id="matkul4" name="matkul4">
                 <div class="col-5">
-                  <select class="form-control select2" id="namaMatkul4" onchange="getSKS('4')">
+                  <select class="form-control select2" id="namaMatkul4" name="namaMatkul4" onchange="getSKS('4')">
                     <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                     {{ mata_kuliah | safe}}
                   </select>
                 </div>
                 <div class="col-4">
-                  <select class="form-control select2" id="dosenMatkul4">
+                  <select class="form-control select2" id="dosenMatkul4" name="dosenMatkul4">
                     <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                     {{ dosen_list | safe}}
                   </select>
                   </div>
                   <div class="col-3">
-                    <input type="text" class="form-control" id="jumlahSKS4" placeholder="Masukkan SKS Mata Kuliah" readonly>
+                    <input type="text" class="form-control" id="jumlahSKS4" name="jumlahSKS4" placeholder="Masukkan SKS Mata Kuliah" readonly>
                   </div>
                 </div>
                 <label for="matkul5">Mata Kuliah 5</label>
-                <div class="form-group row" id="matkul5">
+                <div class="form-group row" id="matkul5" name="matkul5">
                   <div class="col-5">
-                    <select class="form-control select2" id="namaMatkul5" onchange="getSKS('5')">
+                    <select class="form-control select2" id="namaMatkul5" name="namaMatkul5" onchange="getSKS('5')">
                       <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                       {{ mata_kuliah | safe}}
                     </select>
                   </div>
                   <div class="col-4">
-                    <select class="form-control select2" id="dosenMatkul5">
+                    <select class="form-control select2" id="dosenMatkul5" name="dosenMatkul5">
                       <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                       {{ dosen_list | safe}}
                     </select>
                     </div>
                     <div class="col-3">
-                      <input type="text" class="form-control" id="jumlahSKS5" placeholder="Masukkan SKS Mata Kuliah" readonly>
+                      <input type="text" class="form-control" id="jumlahSKS5" name="jumlahSKS5" placeholder="Masukkan SKS Mata Kuliah" readonly>
                     </div>
                   </div>
                   <label for="matkul6">Mata Kuliah 6</label>
-                  <div class="form-group row" id="matkul6">
+                  <div class="form-group row" id="matkul6" name="matkul6">
                     <div class="col-5">
-                      <select class="form-control select2" id="namaMatkul6" onchange="getSKS('6')">
+                      <select class="form-control select2" id="namaMatkul6" name="namaMatkul6" onchange="getSKS('6')">
                         <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                         {{ mata_kuliah | safe}}
                       </select>
                     </div>
                     <div class="col-4">
-                      <select class="form-control select2" id="dosenMatkul6">
+                      <select class="form-control select2" id="dosenMatkul6" name="dosenMatkul6">
                         <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                         {{ dosen_list | safe}}
                       </select>
                       </div>
                       <div class="col-3">
-                        <input type="text" class="form-control" id="jumlahSKS6" placeholder="Masukkan SKS Mata Kuliah" readonly>
+                        <input type="text" class="form-control" id="jumlahSKS6" name="jumlahSKS6" placeholder="Masukkan SKS Mata Kuliah" readonly>
                       </div>
                     </div>
                     <label for="matkul7">Mata Kuliah 7</label>
-                    <div class="form-group row" id="matkul7">
+                    <div class="form-group row" id="matkul7" name="matkul7">
                       <div class="col-5">
-                        <select class="form-control select2" id="namaMatkul7" onchange="getSKS('7')">
+                        <select class="form-control select2" id="namaMatkul7" name="namaMatkul7" onchange="getSKS('7')">
                           <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                           {{ mata_kuliah | safe}}
                         </select>
                       </div>
                       <div class="col-4">
-                        <select class="form-control select2" id="dosenMatkul7">
+                        <select class="form-control select2" id="dosenMatkul7" name="dosenMatkul7">
                           <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                           {{ dosen_list | safe}}
                         </select>
                         </div>
                         <div class="col-3">
-                          <input type="text" class="form-control" id="jumlahSKS7" placeholder="Masukkan SKS Mata Kuliah" readonly>
+                          <input type="text" class="form-control" id="jumlahSKS7" name="jumlahSKS7" placeholder="Masukkan SKS Mata Kuliah" readonly>
                         </div>
                       </div>
                       <label for="matkul8">Mata Kuliah 8</label>
-                      <div class="form-group row" id="matkul8">
+                      <div class="form-group row" id="matkul8" name="matkul8">
                         <div class="col-5">
-                          <select class="form-control select2" id="namaMatkul8" onchange="getSKS('8')">
+                          <select class="form-control select2" id="namaMatkul8" name="namaMatkul8" onchange="getSKS('8')">
                             <option value="" disabled selected>-- Pilih Nama Mata Kuliah --</option>
                             {{ mata_kuliah | safe}}
                           </select>
                         </div>
                         <div class="col-4">
-                          <select class="form-control select2" id="dosenMatkul8">
+                          <select class="form-control select2" id="dosenMatkul8" name="dosenMatkul8">
                             <option value="" disabled selected>-- Pilih Dosen Mata Kuliah --</option>
                             {{ dosen_list | safe}}
                           </select>
                           </div>
                           <div class="col-3">
-                            <input type="text" class="form-control" id="jumlahSKS8" placeholder="Masukkan SKS Mata Kuliah" readonly>
+                            <input type="text" class="form-control" id="jumlahSKS8" name="jumlahSKS8" placeholder="Masukkan SKS Mata Kuliah" readonly>
                           </div>
                         </div>
                       </div>
           <!-- /.card-body -->
 
           <div class="card-footer">
+            {{ message | safe}}
             <button type="submit" class="btn btn-primary">Ajukan</button>
-            <button type="submit" class="btn btn-danger">Batal</button>
+            <button type="button" href="/mahasiswa/index-mhs" class="btn btn-danger">Batal</button>
           </div>
         </form>
       </div>
@@ -401,6 +402,8 @@
 <script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
+<!-- Custom File Input-->
+<script src="{{ url_for ('static',filename='plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <!-- Select2 -->
 <script src="{{ url_for ('static',filename='plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
@@ -409,6 +412,12 @@
     $('.select2').select2();
   });
 </script>
+
+<script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+  </script>
 
 <script type="text/javascript">
   function getSKS(num) {
