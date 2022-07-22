@@ -16,7 +16,7 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/jqvmap/jqvmap.min.css') }}";>
+  <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/jqvmap/jqvmap.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ url_for ('static',filename='dist/css/adminlte.min.css') }}">
   <!-- overlayScrollbars -->
@@ -148,37 +148,37 @@
           <div class="card-body">
             <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
-              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly>
+              <input type="text" class="form-control" id="idPengajuan" value="{{ id_pengajuan }}" placeholder="Masukkan Nomor Pengajuan" readonly>
             </div>
             <div class="form-group">
               <label for="linkSertifikat">Sertifikat Kegiatan MBKM</label>
-              <input type="text" class="form-control" id="linkSertifikat" placeholder="Link Sertifikat Kegiatan MBKM" readonly>
+              <input type="text" class="form-control" id="linkSertifikat" value="{{ link_sertifikat }}" placeholder="Link Sertifikat Kegiatan MBKM" readonly>
             </div>
             <div class="form-group">
               <label for="linkLaporan">Laporan Kegiatan MBKM</label>
-              <input type="text" class="form-control" id="linkLaporan" placeholder="Link Laporan Kegiatan MBKM" readonly>
+              <input type="text" class="form-control" id="linkLaporan" value="{{ link_laporan }}" placeholder="Link Laporan Kegiatan MBKM" readonly>
             </div>
             <div class="form-group">
               <label for="linkHasil">Hasil Kegiatan MBKM</label>
-              <input type="text" class="form-control" id="linkHasil" placeholder="Link Hasil Kegiatan MBKM" readonly>
+              <input type="text" class="form-control" id="linkHasil" value="{{ link_hasil }}" placeholder="Link Hasil Kegiatan MBKM" readonly>
             </div>
             <div class="form-group">
               <label for="mulaiTgl">Tanggal Mulai Kegiatan MBKM</label>
-              <input type="text" class="form-control" id="mulaiTgl" placeholder="dd/mm/yyyy" readonly>
+              <input type="text" class="form-control" id="mulaiTgl" value="{{ tanggal_mulai }}" placeholder="dd/mm/yyyy" readonly>
             </div>
             <div class="form-group">
               <label for="selesaiTgl">Tanggal Selesai Kegiatan MBKM</label>
-              <input type="text" class="form-control" id="selesaiTgl" placeholder="dd/mm/yyyy" readonly>
+              <input type="text" class="form-control" id="selesaiTgl" value="{{ tanggal_selesai }}" placeholder="dd/mm/yyyy" readonly>
             </div>
             <div class="form-group">
               <label for="linkDokumentasi">Dokumentasi Kegiatan MBKM</label>
-              <input type="text" class="form-control" id="linkDokumentasi" placeholder="Link Dokumentasi Kegiatan MBKM" readonly>
+              <input type="text" class="form-control" id="linkDokumentasi" value="{{ link_dokumentasi }}" placeholder="Link Dokumentasi Kegiatan MBKM" readonly>
             </div>
           </div>
 
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Kembali</button>
+            <button type="button" href="/mahasiswa/status-mbkm-mhs" class="btn btn-primary">Kembali</button>
           </div>
         </form>
       </div>
