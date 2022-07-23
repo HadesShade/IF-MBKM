@@ -61,7 +61,7 @@
           <img src="{{ url_for ('static',filename='dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Username Here</a>
+          <a href="#" class="d-block">{{ full_name }}</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -102,7 +102,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/logout"  class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Keluar
@@ -164,11 +164,11 @@
             </div>
             <div class="form-group">
               <label for="mulaiTgl">Tanggal Mulai Kegiatan MBKM</label>
-              <input type="text" class="form-control" id="mulaiTgl" value="{{ tanggal_mulai }}" placeholder="dd/mm/yyyy" readonly>
+              <input type="text" class="form-control" id="mulaiTgl" value="{{ tanggal_mulai }}" placeholder="dd-mm-yyyy" readonly>
             </div>
             <div class="form-group">
               <label for="selesaiTgl">Tanggal Selesai Kegiatan MBKM</label>
-              <input type="text" class="form-control" id="selesaiTgl" value="{{ tanggal_selesai }}" placeholder="dd/mm/yyyy" readonly>
+              <input type="text" class="form-control" id="selesaiTgl" value="{{ tanggal_selesai }}" placeholder="dd-mm-yyyy" readonly>
             </div>
             <div class="form-group">
               <label for="linkDokumentasi">Dokumentasi Kegiatan MBKM</label>
@@ -178,7 +178,7 @@
 
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="button" href="/mahasiswa/status-mbkm-mhs" class="btn btn-primary">Kembali</button>
+            <button type="button" onclick="window.location.href='/mahasiswa/status-mbkm-mhs';" class="btn btn-primary">Kembali</button>
           </div>
         </form>
       </div>
@@ -234,10 +234,10 @@
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
 <script>
   $('#mulaiMBKM').datetimepicker({
-        format: 'DD/MM/YYYY'
+        format: 'DD-MM-YYYY'
     });
     $('#selesaiMBKM').datetimepicker({
-        format: 'DD/MM/YYYY'
+        format: 'DD-MM-YYYY'
     });
 </script>
 </body>

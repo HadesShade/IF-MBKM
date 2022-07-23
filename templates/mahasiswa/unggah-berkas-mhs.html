@@ -61,7 +61,7 @@
           <img src="{{ url_for ('static',filename='dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Username Here</a>
+          <a href="#" class="d-block">{{ full_name }}</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -102,7 +102,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Keluar
@@ -144,43 +144,46 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form method="POST" action="/mahasiswa/add-berkas-pengajuan" enctype="multipart/form-data">
           <div class="card-body">
             <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
-              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly required>
+              <input type="text" class="form-control" id="idPengajuan" name="idPengajuan" value="{{ nomor_pengajuan }}" placeholder="Masukkan Nomor Pengajuan" readonly required>
             </div>
             <div class="form-group">
               <label for="sertifikatMBKM">Sertifikat Kegiatan MBKM</label>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="sertifikatMBKM" required>
+                  <input type="file" class="custom-file-input" id="sertifikatMBKM" name="sertifikatMBKM" required>
                   <label class="custom-file-label" for="sertifikatMBKM">Pilih File</label>
                 </div>
               </div>
+              <p class="text text-danger">Ekstensi File : *.jpg, *.png, *.pdf, *.doc, *.docx, dan *.zip. Ukuran Maksimal : 5 MB</p>
             </div>
             <div class="form-group">
               <label for="laporanMBKM">Laporan Kegiatan MBKM</label>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="laporanMBKM" required>
+                  <input type="file" class="custom-file-input" id="laporanMBKM" name="laporanMBKM" required>
                   <label class="custom-file-label" for="laporanMBKM">Pilih File</label>
                 </div>
               </div>
+              <p class="text text-danger">Ekstensi File : *.jpg, *.png, *.pdf, *.doc, *.docx, dan *.zip. Ukuran Maksimal : 5 MB</p>
             </div>
             <div class="form-group">
               <label for="hasilMBKM">Hasil Kegiatan MBKM</label>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="hasilMBKM" required>
+                  <input type="file" class="custom-file-input" id="hasilMBKM" name="hasilMBKM" required>
                   <label class="custom-file-label" for="hasilMBKM">Pilih File</label>
                 </div>
               </div>
+              <p class="text text-danger">Ekstensi File : *.jpg, *.png, *.pdf, *.doc, *.docx, dan *.zip. Ukuran Maksimal : 5 MB</p>
             </div>
             <div class="form-group">
               <label>Tanggal Mulai Kegiatan MBKM</label>
-                <div class="input-group date" id="mulaiMBKM" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#mulaiMBKM" placeholder="dd/mm/yyyy" required/>
+                <div class="input-group date" id="mulaiMBKM" name="mulaiMBKM" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#mulaiMBKM" name="MBKMstart" id="MBKMstart" placeholder="dd-mm-yyyy" required onchange=addMulai() />
                     <div class="input-group-append" data-target="#mulaiMBKM" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -188,8 +191,8 @@
             </div>
             <div class="form-group">
               <label>Tanggal Selesai Kegiatan MBKM</label>
-                <div class="input-group date" id="selesaiMBKM" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#selesaiMBKM" placeholder="dd/mm/yyyy" required/>
+                <div class="input-group date" id="selesaiMBKM" name="selesaiMBKM" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#selesaiMBKM" name="MBKMfinish" id="MBKMfinish" placeholder="dd-mm-yyyy" required onchange=addSelesai() />
                     <div class="input-group-append" data-target="#selesaiMBKM" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -199,17 +202,19 @@
               <label for="hasilMBKM">Dokumentasi Kegiatan MBKM</label>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="hasilMBKM" required>
+                  <input type="file" class="custom-file-input" id="dokumentasiMBKM" name="dokumentasiMBKM" required>
                   <label class="custom-file-label" for="hasilMBKM">Pilih File</label>
                 </div>
               </div>
+              <p class="text text-danger">Ekstensi File : *.jpg, *.png, *.pdf, *.doc, *.docx, dan *.zip. Ukuran Maksimal : 5 MB</p>
             </div>
           </div>
 
           <!-- /.card-body -->
           <div class="card-footer">
+            {{ message | safe}}
             <button type="submit" class="btn btn-primary">Unggah Berkas</button>
-            <button type="submit" class="btn btn-danger">Batal</button>
+            <button type="button" onclick="window.location.href='/mahasiswa/status-mbkm-mhs';" class="btn btn-danger">Batal</button>
           </div>
         </form>
       </div>
@@ -263,13 +268,20 @@
 <script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
+<!-- Custom File Input-->
+<script src="{{ url_for ('static',filename='plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <script>
   $('#mulaiMBKM').datetimepicker({
-        format: 'DD/MM/YYYY'
-    });
-    $('#selesaiMBKM').datetimepicker({
-        format: 'DD/MM/YYYY'
-    });
+      format: 'DD-MM-YYYY',
+  });
+  $('#selesaiMBKM').datetimepicker({
+      format: 'DD-MM-YYYY',
+  });
+</script>
+<script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
 </script>
 </body>
 </html>

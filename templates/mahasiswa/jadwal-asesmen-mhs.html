@@ -64,7 +64,7 @@
           <img src="{{ url_for ('static',filename='dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Username Here</a>
+          <a href="#" class="d-block">{{ full_name }}</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -105,7 +105,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/logout"  class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Keluar
@@ -149,24 +149,9 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="jadwal-asesmen-mhs" class="table table-bordered table-hover">
                   <thead>
-                  <tr>
-                    <th>Nomor Asesmen</th>
-                    <th>Nomor Pengajuan</th>
-                    <th>Waktu</th>
-                    <th>Tempat/Tautan</th>
-                    <th>Status Asesmen</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>3311901049-22022022-25022022</td>
-                    <td>3311901049-22022022</td>
-                    <td>25-02-2022 10:00</td>
-                    <td>Gedung TA 11.4</td>
-                    <td><p class="text-warning">✕ Belum Selesai</p></td>
-                  </tr>  
+                  {{ list_asesmen }}
                   </tfoot>
                 </table>
               </div>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IF-MBKM | Ubah Asesmen MBKM</title>
+  <title>IF-MBKM | Ubah Hasil Asesmen MBKM</title>
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ url_for ('static', filename='plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
@@ -126,12 +126,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Ubah Asesmen MBKM</h1>
+            <h1 class="m-0">Ubah Hasil Asesmen MBKM</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/sekjur/jadwal-asesmen-sekjur">Jadwal Asesmen MBKM</a></li>
-              <li class="breadcrumb-item active">Ubah Asesmen MBKM</li>
+              <li class="breadcrumb-item active">Ubah Hasil Asesmen MBKM</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -142,7 +142,7 @@
     <section class="content">
       <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">Ubah Asesmen MBKM</h3>
+          <h3 class="card-title">Ubah Hasil Asesmen MBKM</h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -150,158 +150,227 @@
           <div class="card-body">
             <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
-              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly required>
+              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly>
             </div>
-            <div class="form-group">
-              <label>Waktu Asesmen</label>
-                <div class="input-group date" id="waktuAsesmen" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#waktuAsesmen" placeholder="DD/MM/YYYY HH:mm"/>
-                    <div class="input-group-append" data-target="#waktuAsesmen" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
+            <label for="matkul1">Mata Kuliah 1</label>
+            <div class="form-group row" id="matkul1">
+              <div class="col-5">
+                <input type="text" class="form-control" id="namaMatkul1" placeholder="Masukkan Nama Mata Kuliah" readonly required>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" id="dosenMatkul1" placeholder="Masukkan Dosen Mata Kuliah" readonly required>
+              </div>
+              <div class="col-3">
+                <select class="custom-select form-control" id="nilaiMatkul1" required>
+                  <option value="" disabled selected>-- Pilih Nilai --</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="tempatLink">Tempat/Tautan Asesmen</label>
-              <input type="text" class="form-control" id="tempatLink" placeholder="Masukkan Tempat/Tautan Asesmen" required>
+
+            <label for="matkul2">Mata Kuliah 2</label>
+            <div class="form-group row" id="matkul2">
+              <div class="col-5">
+                <input type="text" class="form-control" id="namaMatkul2" placeholder="Masukkan Nama Mata Kuliah" readonly>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" id="dosenMatkul2" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <select class="custom-select form-control" id="nilaiMatkul2">
+                  <option value="" disabled selected>-- Pilih Nilai --</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="mahasiswa">Mahasiswa</label>
-              <select class="form-control select2" id="mahasiswa" required>
-                <option selected="selected" disabled>-- Pilih Mahasiswa --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
+
+            <label for="matkul3">Mata Kuliah 3</label>
+            <div class="form-group row" id="matkul3">
+              <div class="col-5">
+                <input type="text" class="form-control" id="namaMatkul3" placeholder="Masukkan Nama Mata Kuliah" readonly>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" id="dosenMatkul3" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <select class="custom-select form-control" id="nilaiMatkul3">
+                  <option value="" disabled selected>-- Pilih Nilai --</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="kajur">Ketua Jurusan</label>
-              <select class="form-control select2" id="kajur" required>
-                <option selected="selected" disabled>-- Pilih Ketua Jurusan --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
+
+            <label for="matkul4">Mata Kuliah 4</label>
+            <div class="form-group row" id="matkul4">
+              <div class="col-5">
+                <input type="text" class="form-control" id="namaMatkul4" placeholder="Masukkan Nama Mata Kuliah" readonly>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" id="dosenMatkul4" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <select class="custom-select form-control" id="nilaiMatkul4">
+                  <option value="" disabled selected>-- Pilih Nilai --</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="kaprodi">Kepala Program Studi</label>
-              <select class="form-control select2" id="kaprodi" required>
-                <option selected="selected" disabled>-- Pilih Kepala Program Studi --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
+
+            <label for="matkul5">Mata Kuliah 2</label>
+            <div class="form-group row" id="matkul5">
+              <div class="col-5">
+                <input type="text" class="form-control" id="namaMatkul5" placeholder="Masukkan Nama Mata Kuliah" readonly>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" id="dosenMatkul5" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <select class="custom-select form-control" id="nilaiMatkul5">
+                  <option value="" disabled selected>-- Pilih Nilai --</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="dosen1">Dosen Mata Kuliah 1</label>
-              <select class="form-control select2" id="dosen1" required>
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 1 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
+
+            <label for="matkul6">Mata Kuliah 6</label>
+            <div class="form-group row" id="matkul6">
+              <div class="col-5">
+                <input type="text" class="form-control" id="namaMatkul6" placeholder="Masukkan Nama Mata Kuliah" readonly>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" id="dosenMatkul6" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <select class="custom-select form-control" id="nilaiMatkul6">
+                  <option value="" disabled selected>-- Pilih Nilai --</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="dosen2">Dosen Mata Kuliah 2</label>
-              <select class="form-control select2" id="dosen2">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 2 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
+
+            <label for="matkul7">Mata Kuliah 7</label>
+            <div class="form-group row" id="matkul7">
+              <div class="col-5">
+                <input type="text" class="form-control" id="namaMatkul7" placeholder="Masukkan Nama Mata Kuliah" readonly>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" id="dosenMatkul7" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <select class="custom-select form-control" id="nilaiMatkul7">
+                  <option value="" disabled selected>-- Pilih Nilai --</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="dosen3">Dosen Mata Kuliah 3</label>
-              <select class="form-control select2" id="dosen3">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 3 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="dosen4">Dosen Mata Kuliah 4</label>
-              <select class="form-control select2" id="dosen4">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 4 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="dosen5">Dosen Mata Kuliah 5</label>
-              <select class="form-control select2" id="dosen5">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 5 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="dosen6">Dosen Mata Kuliah 6</label>
-              <select class="form-control select2" id="dosen6">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 6 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="dosen7">Dosen Mata Kuliah 7</label>
-              <select class="form-control select2" id="dosen7">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 7 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="dosen8">Dosen Mata Kuliah 8</label>
-              <select class="form-control select2" id="dosen8">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 8 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
-              </select>
+
+            <label for="matkul8">Mata Kuliah 8</label>
+            <div class="form-group row" id="matkul8">
+              <div class="col-5">
+                <input type="text" class="form-control" id="namaMatkul8" placeholder="Masukkan Nama Mata Kuliah" readonly>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" id="dosenMatkul8" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+              </div>
+              <div class="col-3">
+                <select class="custom-select form-control" id="nilaiMatkul8">
+                  <option value="" disabled selected>-- Pilih Nilai --</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Simpan Asesmen</button>
+            <button type="submit" class="btn btn-primary">Simpan Hasil Asesmen</button>
             <button type="submit" class="btn btn-danger">Batal</button>
           </div>
         </form>

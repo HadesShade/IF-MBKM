@@ -64,7 +64,7 @@
           <img src="{{ url_for ('static',filename='dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Username Here</a>
+          <a href="#" class="d-block">{{ full_name }}</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -105,7 +105,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/logout"  class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Keluar
@@ -148,7 +148,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="status-mbkm-mhs" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>Nomor Pengajuan</th>
