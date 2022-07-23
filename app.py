@@ -211,11 +211,11 @@ def status_mbkm_mhs():
 					persetujuan = ""
 					berkas = ""
 					if item['status_pengajuan'] == 'Waiting' :
-						persetujuan = "<td><p class='text-warning'>🕐 Menunggu Persetujuan</p></td>"
-						berkas = "<td><p class='text-warning'>🕐 Menunggu Persetujuan</p></td>"
+						persetujuan = "<td><p class='text text-warning'>🕐 Menunggu Persetujuan</p></td>"
+						berkas = "<td><p class='text text-warning'>🕐 Menunggu Persetujuan</p></td>"
 					elif item['status_pengajuan'] == 'Rejected' :
-						persetujuan = "<td><p class='text-danger'>✕ Pengajuan Ditolak</p></td>"
-						berkas = "<td><p class='text-danger'>✕ Pengajuan Ditolak</p></td>"
+						persetujuan = "<td><p class='text text-danger'>✕ Pengajuan Ditolak</p></td>"
+						berkas = "<td><p class='text text-danger'>✕ Pengajuan Ditolak</p></td>"
 					else:
 						persetujuan = "<td><p class='text-success'>✓ Pengajuan Disetujui</p></td>"
 						berkas = "<td><button type='button' onclick=\"{click}\" class='btn btn-primary'><i class='fas fa-file'></i> Unggah Berkas</button></td>".format(click = f"window.location.href='/mahasiswa/unggah-berkas-mhs?id_pengajuan={item['id_pengajuan']}'")
@@ -226,7 +226,7 @@ def status_mbkm_mhs():
 						berkas = """
 								<td>
 									<button type='button' onclick="window.location.href='/mahasiswa/lihat-berkas-mhs?id_pengajuan={id}'" class='btn btn-primary'><i class='fas fa-eye'></i></button>
-									<button type='button' onclick="window.location.href='/mahasiswa/delete-berkas-mhs?id_pengajuan={id}'"  class="btn btn-danger"><i class="fas fa-trash"></i></button>
+									<button type='button' onclick="window.location.href='/mahasiswa/hapus-berkas-mhs?id_pengajuan={id}'"  class="btn btn-danger"><i class="fas fa-trash"></i></button>
 								</td>
 								""".format(id = item['id_pengajuan'])
 						
@@ -238,7 +238,7 @@ def status_mbkm_mhs():
 							""" + persetujuan + berkas + """
 							<td>
 								<button type="button" onclick="window.location.href='/mahasiswa/status-mbkm-mhs-detail?id_pengajuan={id}'" class="btn btn-primary"><i class="fas fa-eye"></i></button>
-								<button type="button" onclick="window.location.href='/mahasiswa/delete-pengajuan-mhs?id_pengajuan={id}'" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+								<button type="button" onclick="window.location.href='/mahasiswa/hapus-pengajuan-mhs?id_pengajuan={id}'" class="btn btn-danger"><i class="fas fa-trash"></i></button>
 							</td>
 						</tr>
 						""".format(id = item['id_pengajuan'])
@@ -300,8 +300,6 @@ def status_mbkm_mhs_detail():
 					if mat_result:
 						nama_matkul[j] = kode_matkul[j] + ' - ' + mat_result['nama_matkul']
 						sks_matkul[j] = mat_result['jumlah_sks']
-				
-
 							
 				for k in range (len(nomor_dosen)):
 					cursor.execute('SELECT nama from tbl_user where nomor_induk=%s', [nomor_dosen[k]])
@@ -450,8 +448,8 @@ def unggah_berkas_mhs():
 	else:
 		return redirect ('/logout')
 
-@app.route('/mahasiswa/add-berkas-pengajuan', methods=['POST'])
-def add_berkas_mhs():
+@app.route('/mahasiswa/tambah-berkas-pengajuan', methods=['POST'])
+def tambah_berkas_mhs():
 	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
 		if session['role'] == 'Mahasiswa':
 			if request.method == 'POST' and all(i in request.form for i in ('idPengajuan','MBKMstart','MBKMfinish')) and all (j in request.files for j in ('sertifikatMBKM','laporanMBKM','hasilMBKM','dokumentasiMBKM')):
@@ -483,10 +481,10 @@ def add_berkas_mhs():
 						dokumentasi.save(os.path.join(app.config['UPLOAD_FOLDER'], dokumentasi_newname))
 						hasil.save(os.path.join(app.config['UPLOAD_FOLDER'], hasil_newname))
 						
-						link_sertifikat = request.base_url.replace('/mahasiswa/add-berkas-pengajuan', '/uploads/' + sertifikat_newname)
-						link_laporan = request.base_url.replace('/mahasiswa/add-berkas-pengajuan', '/uploads/' + laporan_newname)
-						link_hasil = request.base_url.replace('/mahasiswa/add-berkas-pengajuan', '/uploads/' + hasil_newname)
-						link_dokumentasi = request.base_url.replace('/mahasiswa/add-berkas-pengajuan', '/uploads/' + dokumentasi_newname)
+						link_sertifikat = request.base_url.replace('/mahasiswa/tambah-berkas-pengajuan', '/uploads/' + sertifikat_newname)
+						link_laporan = request.base_url.replace('/mahasiswa/tambah-berkas-pengajuan', '/uploads/' + laporan_newname)
+						link_hasil = request.base_url.replace('/mahasiswa/tambah-berkas-pengajuan', '/uploads/' + hasil_newname)
+						link_dokumentasi = request.base_url.replace('/mahasiswa/tambah-berkas-pengajuan', '/uploads/' + dokumentasi_newname)
 
 						connection = mysql.connection
 						cursor = connection.cursor()
@@ -532,17 +530,183 @@ def index_sekjur():
 	else:
 		return redirect('/login')
 	
-@app.route('/sekjur/daftar-pengajuan-mbkm')
+@app.route('/sekjur/daftar-pengajuan-mbkm', methods=['GET'])
 def daftar_pengajuan_mbkm():
-	return render_template('sekjur/daftar-pengajuan-mbkm.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			full_name = session['fullname']
+			list_pengajuan = ''
+			cursor = cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute("SELECT tbl_pengajuan_mbkm.id_pengajuan, tbl_pengajuan_mbkm.status_pengajuan, tbl_user.nama from tbl_pengajuan_mbkm INNER JOIN tbl_user ON tbl_pengajuan_mbkm.nomor_induk_mahasiswa=tbl_user.nomor_induk")
+			bulk_pengajuan = cursor.fetchall()
+			for item in bulk_pengajuan:
+				status_pengajuan = ""
+				if item['status_pengajuan'] == 'Waiting':
+					status_pengajuan = f"""
+								<td>
+									<button type="button" class="btn btn-primary" onclick="window.location.href='/sekjur/terima-pengajuan?id_pengajuan={item['id_pengajuan']}'"><i class="fas fa-check"></i> Setuju</button>
+                      				<button type="button" class="btn btn-danger" onclick="window.location.href='/sekjur/tolak-pengajuan?id_pengajuan={item['id_pengajuan']}'"><i class="fas fa-times"></i> Tolak</button>
+								</td>
+								<td>
+									<p class='text text-warning'>🕐 Menunggu Persetujuan</p>
+								</td>
+								"""
+				elif item['status_pengajuan'] == 'Rejected':
+					status_pengajuan = """
+								<td>
+									<p class='text text-danger'>✕ Pengajuan Ditolak</p>
+								</td>
+								<td>
+									<p class='text text-danger'>✕ Pengajuan Ditolak</p>
+								</td>
+								"""
+				else:
+					cursor.execute("SELECT * from tbl_berkas_mbkm WHERE id_pengajuan=%s", [item['id_pengajuan']])
+					data_berkas = cursor.fetchone()
+					if data_berkas:
+						status_pengajuan = f"""
+								<td>
+									<p class='text text-success'>✓ Pengajuan Disetujui</p>
+								</td>
+								<td>
+									<button type="button" class="btn btn-primary" onclick="window.location.href='/sekjur/lihat-berkas-sekjur?id_pengajuan={item['id_pengajuan']}'"><i class="fas fa-eye"></i></button>
+									<button type="button" class="btn btn-danger" onclick="window.location.href='/sekjur/hapus-berkas-sekjur?id_pengajuan={item['id_pengajuan']}'"><i class="fas fa-trash"></i></button>
+								</td>
+								"""
+					else:
+						status_pengajuan = f"""
+								<td>
+									<p class='text text-success'>✓ Pengajuan Disetujui</p>
+								</td>
+								<td>
+									<p class='text text-warning'>🕐 Menunggu Berkas</p>
+								</td>
+								"""
+
+				list_pengajuan += f"""
+							<tr>
+								<td>{item['id_pengajuan']}</td>
+								<td>{item['nama']}</td>
+								{status_pengajuan}
+								<td>
+									<button type="button" class="btn btn-primary" onclick="window.location.href='/sekjur/lihat-pengajuan-sekjur?id_pengajuan={item['id_pengajuan']}'"><i class="fas fa-eye"></i></button>
+                      				<button type="button" class="btn btn-danger" onclick="window.location.href='/sekjur/hapus-pengajuan-sekjur?id_pengajuan={item['id_pengajuan']}'"><i class="fas fa-trash"></i></button>
+								</td>
+							</tr>
+								"""
+			return render_template ('sekjur/daftar-pengajuan-mbkm.html', full_name=full_name, list_pengajuan=list_pengajuan)
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 
 @app.route('/sekjur/lihat-berkas-sekjur')
 def lihat_berkas_sekjur():
-	return render_template('sekjur/lihat-berkas-sekjur.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if request.method == 'GET' and 'id_pengajuan' in request.args:
+				full_name = session['fullname']
+				id_pengajuan = request.args.get('id_pengajuan')
+				link_sertifikat = ""
+				link_laporan = ""
+				link_hasil = ""
+				tanggal_mulai =""
+				tanggal_selesai = ""
+				link_dokumentasi = ""
 
-@app.route('/sekjur/lihat-pengajuan-sekjur')
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute("SELECT * from tbl_berkas_mbkm WHERE id_pengajuan=%s", [id_pengajuan])
+				berkas_result = cursor.fetchone()
+				if berkas_result:
+					link_sertifikat = berkas_result['sertifikat_program']
+					link_laporan = berkas_result['laporan_program']
+					link_hasil = berkas_result['hasil_program']
+					tanggal_mulai = berkas_result['tanggal_mulai_program'].strftime("%d-%m-%Y")
+					tanggal_selesai = berkas_result['tanggal_selesai_program'].strftime("%d-%m-%Y")
+					link_dokumentasi = berkas_result['dokumentasi_program']
+				return render_template('sekjur/lihat-berkas-sekjur.html', full_name=full_name, id_pengajuan=id_pengajuan, link_sertifikat=link_sertifikat, link_laporan=link_laporan, link_hasil=link_hasil, tanggal_mulai=tanggal_mulai, tanggal_selesai=tanggal_selesai, link_dokumentasi=link_dokumentasi)
+			else:
+				return "<script>alert('Operasi Gagal! Tidak ada Nomor Pengajuan!'); window.location.href='/';</script>"
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
+
+@app.route('/sekjur/lihat-pengajuan-sekjur',methods=['GET'])
 def lihat_pengajuan_sekjur():
-	return render_template('sekjur/lihat-pengajuan-sekjur.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if request.method == 'GET' and 'id_pengajuan' in request.args:
+				full_name = session['fullname']
+				nama_lengkap_mhs = ""
+				nomor_induk_mhs = ""
+				program_studi_kode = ""
+				program_studi = ""
+				tahun_angkatan = ""
+				nama_mbkm = ""
+				jenis_mbkm = ""
+				tempat_mbkm = ""
+				semester_mbkm = ""
+				link_bukti =""
+				kode_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				nomor_dosen = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				nama_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				dosen_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				sks_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute("SELECT * from tbl_pengajuan_mbkm where id_pengajuan=%s", [request.args.get('id_pengajuan')])
+				pengajuan_result = cursor.fetchone()
+				if pengajuan_result:
+					nomor_induk_mhs = pengajuan_result['nomor_induk_mahasiswa']
+					program_studi_kode = pengajuan_result['kode_prodi']
+					tahun_angkatan = pengajuan_result['angkatan']
+					nama_mbkm = pengajuan_result['nama_program']
+					jenis_mbkm = pengajuan_result['jenis_program']
+					tempat_mbkm = pengajuan_result['tempat_program']
+					link_bukti = pengajuan_result['bukti_program']
+					semester_mbkm = pengajuan_result['semester_klaim']
+				
+				cursor.execute("SELECT nama from tbl_user where nomor_induk=%s", [nomor_induk_mhs])
+				user_result = cursor.fetchone()
+				if user_result:
+					nama_lengkap_mhs = user_result['nama']
+							
+				cursor.execute("SELECT nama_prodi,jenjang from tbl_prodi_if where kode_prodi=%s", [program_studi_kode])
+				prodi_result = cursor.fetchone()
+				if prodi_result:
+					program_studi = program_studi_kode + ' - ' + prodi_result['jenjang'] + ' ' + prodi_result['nama_prodi']
+		
+				cursor.execute("SELECT * from tbl_matkul_mbkm where id_pengajuan=%s", [request.args.get('id_pengajuan')])
+				matkul_result = cursor.fetchone()
+				if matkul_result:
+					for i in range (1,9):
+						kode_matkul[i-1] = matkul_result['kode_matkul_' + str(i)]
+						nomor_dosen[i-1] = matkul_result['nomor_dosen_' + str(i)]
+				
+				for j in range (len(kode_matkul)):
+					cursor.execute("SELECT nama_matkul, jumlah_sks from tbl_mata_kuliah where kode_matkul=%s",[kode_matkul[j]])
+					mat_result = cursor.fetchone()
+					if mat_result:
+						nama_matkul[j] = kode_matkul[j] + ' - ' + mat_result['nama_matkul']
+						sks_matkul[j] = mat_result['jumlah_sks']
+							
+				for k in range (len(nomor_dosen)):
+					cursor.execute('SELECT nama from tbl_user where nomor_induk=%s', [nomor_dosen[k]])
+					dosen_result = cursor.fetchone()
+					if dosen_result:
+						dosen_matkul[k] = nomor_dosen[k] + ' - ' + dosen_result['nama']
+
+				return render_template('sekjur/lihat-pengajuan-sekjur.html', full_name=full_name, nama_lengkap_mhs=nama_lengkap_mhs, nomor_induk_mhs=nomor_induk_mhs, program_studi=program_studi, tahun_angkatan=tahun_angkatan, nama_mbkm=nama_mbkm, jenis_mbkm=jenis_mbkm, tempat_mbkm=tempat_mbkm, link_bukti=link_bukti, semester_mbkm=semester_mbkm, \
+				nama_matkul1=nama_matkul[0], dosen_matkul1=dosen_matkul[0], sks_matkul1=sks_matkul[0], nama_matkul2=nama_matkul[1], dosen_matkul2=dosen_matkul[1], sks_matkul2=sks_matkul[1], nama_matkul3=nama_matkul[2], dosen_matkul3=dosen_matkul[2], sks_matkul3=sks_matkul[2], nama_matkul4=nama_matkul[3], dosen_matkul4=dosen_matkul[3], sks_matkul4=sks_matkul[3], \
+				nama_matkul5=nama_matkul[4], dosen_matkul5=dosen_matkul[4], sks_matkul5=sks_matkul[4], nama_matkul6=nama_matkul[5], dosen_matkul6=dosen_matkul[5], sks_matkul6=sks_matkul[5], nama_matkul7=nama_matkul[6], dosen_matkul7=dosen_matkul[6], sks_matkul7=sks_matkul[6], nama_matkul8=nama_matkul[7], dosen_matkul8=dosen_matkul[7], sks_matkul8=sks_matkul[7])
+			
+			else:
+				return "<script>alert('Operasi Gagal! Tidak ada Nomor Pengajuan!'); window.location.href='/';</script>"
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 
 @app.route('/sekjur/jadwal-asesmen-sekjur')
 def jadwal_asesmen_sekjur():
@@ -725,8 +889,8 @@ def get_sks():
 def get_file(name):
 	return send_from_directory(app.config["UPLOAD_FOLDER"], name)
 
-@app.route('/mahasiswa/delete-pengajuan-mhs', methods=['GET'])
-def delete_pengajuan():
+@app.route('/mahasiswa/hapus-pengajuan-mhs', methods=['GET'])
+def hapus_pengajuan_mhs():
 	if 'id_pengajuan' in request.args and session['nomor_induk'] in request.args.get('id_pengajuan'):
 		if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
 			if session['role'] == 'Mahasiswa':
@@ -758,8 +922,8 @@ def delete_pengajuan():
 	else:
 		return "<script>alert('Operasi Gagal! Tidak ada Nomor Pengajuan!'); window.location.href='/';</script>"
 
-@app.route('/mahasiswa/delete-berkas-mhs', methods=['GET'])
-def delete_berkas():
+@app.route('/mahasiswa/hapus-berkas-mhs', methods=['GET'])
+def hapus_berkas_mhs():
 	if 'id_pengajuan' in request.args and session['nomor_induk'] in request.args.get('id_pengajuan'):
 		if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
 			if session['role'] == 'Mahasiswa':
@@ -792,8 +956,111 @@ def delete_berkas():
 	else:
 		return "<script>alert('Operasi Gagal! Tidak ada Nomor Pengajuan!'); window.location.href='/';</script>"
 
+@app.route('/sekjur/terima-pengajuan', methods=['GET'])
+def sekjur_terima_pengajuan():
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if request.method == 'GET' and 'id_pengajuan' in request.args:
+				try:
+					connection = mysql.connection
+					cursor = connection.cursor()
+					cursor.execute("UPDATE tbl_pengajuan_mbkm SET status_pengajuan='Accepted' WHERE id_pengajuan=%s", [request.args.get('id_pengajuan')])
+					connection.commit()
 
+					return "<script>alert('Pengajuan Berhasil Disetujui!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
 
+				except Exception:
+					return "<script>alert('Pengajuan Gagal Disetujui!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+			else:
+				return "<script>alert('Operasi Gagal! Tidak Ada Nomor Pengajuan!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+		else:
+				return redirect('/')
+	else:
+		return redirect('/login')
 
+@app.route('/sekjur/tolak-pengajuan', methods=['GET'])
+def sekjur_tolak_pengajuan():
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if request.method == 'GET' and 'id_pengajuan' in request.args:
+				#try:
+					connection = mysql.connection
+					cursor = connection.cursor()
+					cursor.execute("UPDATE tbl_pengajuan_mbkm SET status_pengajuan='Rejected' WHERE id_pengajuan=%s", [request.args.get('id_pengajuan')])
+					connection.commit()
 
+					return "<script>alert('Pengajuan Berhasil Ditolak!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
 
+				#except Exception:
+				#	return "<script>alert('Pengajuan Gagal Ditolak!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+			else:
+				return "<script>alert('Operasi Gagal! Tidak Ada Nomor Pengajuan!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+		else:
+				return redirect('/')
+	else:
+		return redirect('/login')
+
+@app.route('/sekjur/hapus-pengajuan-sekjur', methods=['GET'])
+def sekjur_hapus_pengajuan():
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if request.method == 'GET' and 'id_pengajuan' in request.args:
+				try:
+					cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+					cursor.execute('SELECT id_assesmen from tbl_kegiatan_assesmen WHERE id_pengajuan=%s', [request.args.get('id_pengajuan')])
+					if not cursor.fetchone():
+						file_list = glob.glob(app.config['UPLOAD_FOLDER'] + '/' + request.args.get('id_pengajuan') + '*')
+						for file in file_list:
+							os.remove(file)
+						connection = mysql.connection
+						delete_cursor = connection.cursor()
+						delete_cursor.execute('DELETE FROM tbl_berkas_mbkm where id_pengajuan=%s', [request.args.get('id_pengajuan')])
+						delete_cursor.execute('DELETE FROM tbl_matkul_mbkm where id_pengajuan=%s', [request.args.get('id_pengajuan')])
+						delete_cursor.execute('DELETE FROM tbl_pengajuan_mbkm where id_pengajuan=%s', [request.args.get('id_pengajuan')])
+						connection.commit()
+
+						return "<script>alert('Pengajuan Berhasil Dihapus!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+					
+					else:
+						return "<script>alert('Pengajuan Gagal Dihapus! Jadwal Asesmen Sudah Ada!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+				except Exception:
+					return "<script>alert('Pengajuan Gagal Dihapus!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+			else:
+				return "<script>alert('Operasi Gagal! Tidak Ada Nomor Pengajuan!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+		else:
+				return redirect('/')
+	else:
+		return redirect('/login')
+
+@app.route('/sekjur/hapus-berkas-sekjur', methods=['GET'])
+def sekjur_hapus_berkas():
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if request.method == 'GET' and 'id_pengajuan' in request.args:
+				try:
+					cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+					cursor.execute('SELECT id_assesmen from tbl_kegiatan_assesmen WHERE id_pengajuan=%s', [request.args.get('id_pengajuan')])
+					if not cursor.fetchone():
+						file_list = glob.glob(app.config['UPLOAD_FOLDER'] + '/' + request.args.get('id_pengajuan') + '*')
+						for file in file_list:
+							if 'buktiMBKM' in file:
+								continue
+							else:
+								os.remove(file)
+						connection = mysql.connection
+						delete_cursor = connection.cursor()
+						delete_cursor.execute('DELETE FROM tbl_berkas_mbkm where id_pengajuan=%s', [request.args.get('id_pengajuan')])
+						connection.commit()
+
+						return "<script>alert('Berkas Berhasil Dihapus!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+					
+					else:
+						return "<script>alert('Berkas Gagal Dihapus! Jadwal Asesmen Sudah Ada!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+				except Exception:
+					return "<script>alert('Berkas Gagal Dihapus!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"	
+			else:
+				return "<script>alert('Operasi Gagal! Tidak Ada Nomor Pengajuan!');window.location.href='/sekjur/daftar-pengajuan-mbkm';</script>"
+		else:
+				return redirect('/')
+	else:
+		return redirect('/login')

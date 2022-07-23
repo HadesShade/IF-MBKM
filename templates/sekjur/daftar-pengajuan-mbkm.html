@@ -151,22 +151,8 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>3311901049-22022022</td>
-                    <td>Kevin Timoteus Sirait</td>
-                    <td>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-check"></i> Setuju</button>
-                      <button type="button" class="btn btn-danger"><i class="fas fa-times"></i> Tolak</button>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i> Lihat Berkas</button>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                    </td>
-                  </tr>  
-                  </tfoot>
+                    {{ list_pengajuan | safe}}
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
