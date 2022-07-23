@@ -151,8 +151,17 @@
               <div class="card-body">
                 <table id="jadwal-asesmen-mhs" class="table table-bordered table-hover">
                   <thead>
-                  {{ list_asesmen }}
-                  </tfoot>
+                  <tr>
+                    <th>Nomor Asesmen</th>
+                    <th>Nomor Pengajuan</th>
+                    <th>Waktu</th>
+                    <th>Tempat/Tautan</th>
+                    <th>Status Asesmen</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {{ list_asesmen}}
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
