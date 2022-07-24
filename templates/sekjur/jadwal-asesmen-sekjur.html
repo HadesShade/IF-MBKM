@@ -152,30 +152,13 @@
                     <th>Nomor Pengajuan</th>
                     <th>Waktu</th>
                     <th>Tempat/Tautan</th>
-                    <th>Status Asesmen</th>
+                    <th>Hasil Asesmen</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>3311901049-22022022-25022022</td>
-                    <td>3311901049-22022022</td>
-                    <td>
-                      <p>25-02-2022 10:00</p>
-                    </td>
-                    <td>
-                      <p>Gedung TA 11.4</p>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Proses</button>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>
-                      <button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                    </td>
-                  </tr>  
-                  </tfoot>
+                  {{ list_asesmen | safe }}
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -257,7 +240,11 @@
       "dom": '<"toolbar">frtip'
     });
 
-    $('div.toolbar').html('<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Buat Jadwal</button>');
+    $('div.toolbar').html('<button type="button" class="btn btn-success" onclick=buatAsesmen()><i class="fas fa-plus"></i> Buat Jadwal</button>');
+
+    $("div.toolbar").find("button").off().on("click", function (e) {
+      window.location.href='/sekjur/buat-asesmen-sekjur';
+    });
   });
 </script>
 

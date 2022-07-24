@@ -156,11 +156,11 @@
                     <th>Nomor Pengajuan</th>
                     <th>Waktu</th>
                     <th>Tempat/Tautan</th>
-                    <th>Status Asesmen</th>
+                    <th>Hasil Asesmen</th>
                   </tr>
                   </thead>
                   <tbody>
-                    {{ list_asesmen}}
+                    {{ list_asesmen | safe }}
                   </tbody>
                 </table>
               </div>

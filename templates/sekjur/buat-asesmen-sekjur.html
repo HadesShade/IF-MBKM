@@ -146,16 +146,19 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form method="POST" action="">
           <div class="card-body">
             <div class="form-group">
-              <label for="idPengajuan">Nomor Pengajuan</label>
-              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" required>
+              <label for="mahasiswa">Nomor Pengajuan</label>
+              <select class="form-control select2" id="idPengajuan" name="idPengajuan" required>
+                <option selected="selected" value="" disabled>-- Pilih Nomor Pengajuan --</option>
+                {{ list_pengajuan | safe }}
+              </select>
             </div>
             <div class="form-group">
               <label>Waktu Asesmen</label>
                 <div class="input-group date" id="waktuAsesmen" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#waktuAsesmen" placeholder="DD/MM/YYYY HH:mm"/>
+                    <input type="text" class="form-control datetimepicker-input" data-target="#waktuAsesmen" id="timeAsesmen" name="timeAsesmen" placeholder="DD/MM/YYYY HH:mm"/>
                     <div class="input-group-append" data-target="#waktuAsesmen" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -163,146 +166,97 @@
             </div>
             <div class="form-group">
               <label for="tempatLink">Tempat/Tautan Asesmen</label>
-              <input type="text" class="form-control" id="tempatLink" placeholder="Masukkan Tempat/Tautan Asesmen" required>
+              <input type="text" class="form-control" id="tempatLink" name="tempatLink" placeholder="Masukkan Tempat/Tautan Asesmen" required>
             </div>
             <div class="form-group">
               <label for="mahasiswa">Mahasiswa</label>
-              <select class="form-control select2" id="mahasiswa" required>
-                <option selected="selected" disabled>-- Pilih Mahasiswa --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="mahasiswa" name="mahasiswa" required>
+                <option selected="selected" value="" disabled>-- Pilih Mahasiswa --</option>
+                {{ list_mahasiswa | safe }}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="dosen_wali">Dosen Wali</label>
+              <select class="form-control select2" id="dosen_wali" name="dosen_wali" required>
+                <option selected="selected" value="" disabled>-- Pilih Dosen Wali --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="kajur">Ketua Jurusan</label>
-              <select class="form-control select2" id="kajur" required>
-                <option selected="selected" disabled>-- Pilih Ketua Jurusan --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="kajur" name="kajur" required>
+                <option selected="selected" value="" disabled>-- Pilih Ketua Jurusan --</option>
+                {{ list_kajur | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="kaprodi">Kepala Program Studi</label>
-              <select class="form-control select2" id="kaprodi" required>
-                <option selected="selected" disabled>-- Pilih Kepala Program Studi --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="kaprodi" name="kaprodi" required>
+                <option selected="selected" value="" disabled>-- Pilih Kepala Program Studi --</option>
+                {{ list_kaprodi | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen1">Dosen Mata Kuliah 1</label>
-              <select class="form-control select2" id="dosen1" required>
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 1 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="dosen1" name="dosen1" required>
+                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 1 --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen2">Dosen Mata Kuliah 2</label>
-              <select class="form-control select2" id="dosen2">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 2 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="dosen2" name="dosen2">
+                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 2 --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen3">Dosen Mata Kuliah 3</label>
-              <select class="form-control select2" id="dosen3">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 3 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="dosen3" name="dosen3">
+                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 3 --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen4">Dosen Mata Kuliah 4</label>
-              <select class="form-control select2" id="dosen4">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 4 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="dosen4" name="dosen4">
+                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 4 --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen5">Dosen Mata Kuliah 5</label>
-              <select class="form-control select2" id="dosen5">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 5 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="dosen5" name="dosen5">
+                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 5 --</option>
+                {{ list_dosen | safe }}>
               </select>
             </div>
             <div class="form-group">
               <label for="dosen6">Dosen Mata Kuliah 6</label>
-              <select class="form-control select2" id="dosen6">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 6 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="dosen6" name="dosen6">
+                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 6 --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen7">Dosen Mata Kuliah 7</label>
-              <select class="form-control select2" id="dosen7">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 7 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="dosen7" name="dosen7">
+                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 7 --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen8">Dosen Mata Kuliah 8</label>
-              <select class="form-control select2" id="dosen8">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 8 --</option>
-                <option>Alaska - 1122</option>
-                <option>California - 2233</option>
-                <option>Delaware - 3344</option>
-                <option>Tennessee - 4455</option>
-                <option>Texas - 5566</option>
-                <option>Washington - 6677</option>
+              <select class="form-control select2" id="dosen8" name="dosen8">
+                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 8 --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
           </div>
-        </div>
           <!-- /.card-body -->
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Buat Asesmen</button>
-            <button type="submit" class="btn btn-danger">Batal</button>
+            <button type="button" class="btn btn-danger" onclick="window.location.href='/sekjur/jadwal-asesmen-sekjur'">Batal</button>
           </div>
         </form>
       </div>
@@ -381,7 +335,7 @@
     });
 
     $('div.toolbar').html('<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Buat Jadwal</button>');
-    $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD/MM/YYYY HH:mm' });
+    $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD-MM-YYYY HH:mm' });
   });
 </script>
 <!-- Select2 -->
