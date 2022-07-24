@@ -372,12 +372,17 @@ def jadwal_asesmen_mhs():
 							"""
 				else:
 					list_asesmen += f"""
-								<td><button type='button' onclick="window.location.href='/mahasiswa/hasil-asesmen-mhs?id_asesmen={daftar_asesmen['id_assesmen']}'" class='btn btn-primary'><i class='fas fa-eye'></i></button></td>
+								<td><button type='button' onclick="window.location.href='/mahasiswa/hasil-asesmen-mhs?id_asesmen={item['id_assesmen']}'" class='btn btn-primary'><i class='fas fa-eye'></i></button></td>
 							</tr>
 							"""
 
-		return render_template('/mahasiswa/jadwal-asesmen-mhs.html', full_name=full_name, list_asesmen=list_asesmen)
-
+			return render_template('/mahasiswa/jadwal-asesmen-mhs.html', full_name=full_name, list_asesmen=list_asesmen)
+		
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
+		
 @app.route('/mahasiswa/hasil-asesmen-mhs', methods=['GET'])
 def hasil_asesmen_mhs():
 	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
@@ -403,7 +408,6 @@ def hasil_asesmen_mhs():
 						for i in range (1,9):
 							kode_matkul[i-1] = matkul_result['kode_matkul_' + str(i)]
 							nomor_dosen[i-1] = matkul_result['nomor_dosen_' + str(i)]
-							nilai_matkul[i-1] = matkul_result['nilai_matkul_' + str(i)]
 				
 				for j in range (len(kode_matkul)):
 					cursor.execute("SELECT nama_matkul, jumlah_sks from tbl_mata_kuliah where kode_matkul=%s",[kode_matkul[j]])
@@ -417,7 +421,14 @@ def hasil_asesmen_mhs():
 					if dosen_result:
 						dosen_matkul[k] = nomor_dosen[k] + ' - ' + dosen_result['nama']
 				
-				return render_template('mahasiswa/hasil-asesmen-mhs.html', full_name=full_name, id_pengajuan=id_pengajuan, namaMatkul1=nama_matkul[0], dosenMatkul1=dosen_matkul[0], nilaiMatkul1=nilai_matkul[0], namaMatkul2=nama_matkul[1], dosenMatkul2=dosen_matkul[1], nilaiMatkul2=nilai_matkul[1], \
+				for l in range (len(kode_matkul)):
+					cursor.execute("SELECT * from tbl_form_assesmen where id_assesmen=%s", [id_asesmen])
+					nilai_result = cursor.fetchone()
+					if nilai_result:
+						if nilai_result['nilai_matkul_' + str(l+1)] is not None:
+							nilai_matkul[l] = nilai_result['nilai_matkul_' + str(l+1)]
+				
+				return render_template('mahasiswa/hasil-asesmen-mhs.html', full_name=full_name, id_asesmen=id_asesmen, id_pengajuan=id_pengajuan, namaMatkul1=nama_matkul[0], dosenMatkul1=dosen_matkul[0], nilaiMatkul1=nilai_matkul[0], namaMatkul2=nama_matkul[1], dosenMatkul2=dosen_matkul[1], nilaiMatkul2=nilai_matkul[1], \
 				namaMatkul3=nama_matkul[2], dosenMatkul3=dosen_matkul[2], nilaiMatkul3=nilai_matkul[2], namaMatkul4=nama_matkul[3], dosenMatkul4=dosen_matkul[3], nilaiMatkul4=nilai_matkul[3], namaMatkul5=nama_matkul[4], dosenMatkul5=dosen_matkul[4], nilaiMatkul5=nilai_matkul[4], \
 				namaMatkul6=nama_matkul[5], dosenMatkul6=dosen_matkul[5], nilaiMatkul6=nilai_matkul[5], namaMatkul7=nama_matkul[6], dosenMatkul7=dosen_matkul[6], nilaiMatkul7=nilai_matkul[6], namaMatkul8=nama_matkul[7], dosenMatkul8=dosen_matkul[7], nilaiMatkul8=nilai_matkul[7])
 
@@ -884,8 +895,6 @@ def ubah_asesmen_sekjur():
 					for i in range (1,9):
 						if asesmen_detail[f'nomor_dosen_{i}'] :
 							nomor_dosen[i-1] = asesmen_detail[f'nomor_dosen_{i}']
-						else:
-							continue
 					
 					cursor.execute("SELECT nama from tbl_user WHERE nomor_induk=%s", [nomor_mahasiswa])
 					mhs_detail = cursor.fetchone()
@@ -916,10 +925,7 @@ def ubah_asesmen_sekjur():
 			return redirect('/')
 	else:
 		return redirect('/login')
-
-
 	
-
 @app.route('/sekjur/lihat-asesmen-sekjur', methods=['GET'])
 def lihat_asesmen_sekjur():
 	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
@@ -956,8 +962,6 @@ def lihat_asesmen_sekjur():
 					for i in range (1,9):
 						if asesmen_detail[f'nomor_dosen_{i}'] :
 							nomor_dosen[i-1] = asesmen_detail[f'nomor_dosen_{i}']
-						else:
-							continue
 					
 					cursor.execute("SELECT nama from tbl_user WHERE nomor_induk=%s", [nomor_mahasiswa])
 					mhs_detail = cursor.fetchone()
@@ -995,16 +999,48 @@ def lihat_asesmen_sekjur():
 	else:
 		return redirect('/login')
 
-					
-
-			
-
-				
-
-
 @app.route('/sekjur/proses-asesmen-sekjur')
 def proses_asesmen_sekjur():
-	return render_template('sekjur/proses-asesmen-sekjur.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if request.method == 'GET' and 'id_asesmen' in request.args :
+				id_asesmen = request.args.get('id_asesmen')
+				full_name = session['fullname']
+				id_pengajuan = id_asesmen.split('-')[0] + '-' + id_asesmen.split('-')[1]
+				kode_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				nomor_dosen = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				nama_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				dosen_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute("SELECT * from tbl_matkul_mbkm where id_pengajuan=%s", [id_pengajuan])
+				matkul_result = cursor.fetchone()
+				if matkul_result:
+					for i in range (1,9):
+						kode_matkul[i-1] = matkul_result['kode_matkul_' + str(i)]
+						nomor_dosen[i-1] = matkul_result['nomor_dosen_' + str(i)]
+				
+				for j in range (len(kode_matkul)):
+					cursor.execute("SELECT nama_matkul, jumlah_sks from tbl_mata_kuliah where kode_matkul=%s",[kode_matkul[j]])
+					mat_result = cursor.fetchone()
+					if mat_result:
+						nama_matkul[j] = kode_matkul[j] + ' - ' + mat_result['nama_matkul']
+							
+				for k in range (len(nomor_dosen)):
+					cursor.execute('SELECT nama from tbl_user where nomor_induk=%s', [nomor_dosen[k]])
+					dosen_result = cursor.fetchone()
+					if dosen_result:
+						dosen_matkul[k] = nomor_dosen[k] + ' - ' + dosen_result['nama']
+
+				return render_template('sekjur/proses-asesmen-sekjur.html', full_name=full_name, id_asesmen=id_asesmen, id_pengajuan=id_pengajuan, matkul1=nama_matkul[0], matkul2=nama_matkul[1], matkul3=nama_matkul[2], matkul4=nama_matkul[3], \
+				matkul5=nama_matkul[4], matkul6=nama_matkul[5], matkul7=nama_matkul[6], matkul8=nama_matkul[7], dosen1=dosen_matkul[0], dosen2=dosen_matkul[1], dosen3=dosen_matkul[2], dosen4=dosen_matkul[3], dosen5=dosen_matkul[4], \
+				dosen6=dosen_matkul[5], dosen7=dosen_matkul[6], dosen8=dosen_matkul[7])
+			else:
+				return "<script>alert('Operasi Gagal! Tidak ada Nomor Pengajuan!'); window.location.href='/';</script>"
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')
 
 @app.route('/dosen/index-dosen', methods=['GET'])
 def index_dosen():
@@ -1135,9 +1171,62 @@ def hasil_asesmen_kajur():
 def hasil_asesmen_kaprodi():
 	return render_template('kaprodi/hasil-asesmen-kaprodi.html')
 
-@app.route('/sekjur/hasil-asesmen-sekjur')
+@app.route('/sekjur/hasil-asesmen-sekjur', methods=['GET'])
 def hasil_asesmen_sekjur():
-	return render_template('sekjur/hasil-asesmen-sekjur.html')
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if 'id_asesmen' in request.args:
+				full_name = session['fullname']
+				id_asesmen = request.args.get('id_asesmen')
+				id_pengajuan = ""
+				kode_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				nomor_dosen = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				nama_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				dosen_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+				nilai_matkul = ['Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada', 'Tidak Ada']
+
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute ("SELECT tbl_kegiatan_assesmen.id_pengajuan, tbl_form_assesmen.* from tbl_kegiatan_assesmen INNER JOIN tbl_form_assesmen ON tbl_kegiatan_assesmen.id_assesmen=tbl_form_assesmen.id_assesmen WHERE tbl_kegiatan_assesmen.id_assesmen=%s", [id_asesmen])
+				hasil_detail = cursor.fetchone()
+				if hasil_detail:
+					id_pengajuan = hasil_detail['id_pengajuan']
+					cursor.execute("SELECT * from tbl_matkul_mbkm WHERE id_pengajuan=%s", [id_pengajuan])
+					matkul_result = cursor.fetchone()
+					if matkul_result:
+						for i in range (1,9):
+							kode_matkul[i-1] = matkul_result['kode_matkul_' + str(i)]
+							nomor_dosen[i-1] = matkul_result['nomor_dosen_' + str(i)]
+				
+				for j in range (len(kode_matkul)):
+					cursor.execute("SELECT nama_matkul, jumlah_sks from tbl_mata_kuliah where kode_matkul=%s",[kode_matkul[j]])
+					mat_result = cursor.fetchone()
+					if mat_result:
+						nama_matkul[j] = kode_matkul[j] + ' - ' + mat_result['nama_matkul']
+
+				for k in range (len(nomor_dosen)):
+					cursor.execute('SELECT nama from tbl_user where nomor_induk=%s', [nomor_dosen[k]])
+					dosen_result = cursor.fetchone()
+					if dosen_result:
+						dosen_matkul[k] = nomor_dosen[k] + ' - ' + dosen_result['nama']
+				
+				for l in range (len(kode_matkul)):
+					cursor.execute("SELECT * from tbl_form_assesmen where id_assesmen=%s", [id_asesmen])
+					nilai_result = cursor.fetchone()
+					if nilai_result:
+						if nilai_result['nilai_matkul_' + str(l+1)] is not None:
+							nilai_matkul[l] = nilai_result['nilai_matkul_' + str(l+1)]
+				
+				return render_template('sekjur/hasil-asesmen-sekjur.html', full_name=full_name, id_asesmen=id_asesmen, id_pengajuan=id_pengajuan, namaMatkul1=nama_matkul[0], dosenMatkul1=dosen_matkul[0], nilaiMatkul1=nilai_matkul[0], namaMatkul2=nama_matkul[1], dosenMatkul2=dosen_matkul[1], nilaiMatkul2=nilai_matkul[1], \
+				namaMatkul3=nama_matkul[2], dosenMatkul3=dosen_matkul[2], nilaiMatkul3=nilai_matkul[2], namaMatkul4=nama_matkul[3], dosenMatkul4=dosen_matkul[3], nilaiMatkul4=nilai_matkul[3], namaMatkul5=nama_matkul[4], dosenMatkul5=dosen_matkul[4], nilaiMatkul5=nilai_matkul[4], \
+				namaMatkul6=nama_matkul[5], dosenMatkul6=dosen_matkul[5], nilaiMatkul6=nilai_matkul[5], namaMatkul7=nama_matkul[6], dosenMatkul7=dosen_matkul[6], nilaiMatkul7=nilai_matkul[6], namaMatkul8=nama_matkul[7], dosenMatkul8=dosen_matkul[7], nilaiMatkul8=nilai_matkul[7])
+
+			else:
+				return "<script>alert('Operasi Gagal! Tidak ada Nomor Asesmen!'); window.location.href='/';</script>"
+		else:
+			return redirect('/login')
+	else:
+		return redirect('/')
+	
 
 @app.route('/sekjur/ubah-hasil-asesmen')
 def ubah_hasil_asesmen():
@@ -1211,10 +1300,9 @@ def hapus_berkas_mhs():
 					if not cursor.fetchone():
 						file_list = glob.glob(app.config['UPLOAD_FOLDER'] + '/' + request.args.get('id_pengajuan') + '*')
 						for file in file_list:
-							if 'buktiMBKM' in file:
-								continue
-							else:
+							if 'buktiMBKM' not in file:
 								os.remove(file)
+								
 						connection = mysql.connection
 						delete_cursor = connection.cursor()
 						delete_cursor.execute('DELETE FROM tbl_berkas_mbkm where id_pengajuan=%s', [request.args.get('id_pengajuan')])
@@ -1321,10 +1409,9 @@ def sekjur_hapus_berkas():
 					if not cursor.fetchone():
 						file_list = glob.glob(app.config['UPLOAD_FOLDER'] + '/' + request.args.get('id_pengajuan') + '*')
 						for file in file_list:
-							if 'buktiMBKM' in file:
-								continue
-							else:
+							if 'buktiMBKM' not in file:
 								os.remove(file)
+								
 						connection = mysql.connection
 						delete_cursor = connection.cursor()
 						delete_cursor.execute('DELETE FROM tbl_berkas_mbkm where id_pengajuan=%s', [request.args.get('id_pengajuan')])
@@ -1385,4 +1472,39 @@ def proses_ubah_asesmen():
 		else:
 			return redirect('/')
 	else:
-		return redirect('/login')	
+		return redirect('/login')
+
+@app.route('/sekjur/tambah-hasil-asesmen',methods=['POST'])
+def tambah_hasil_asesmen():
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Sekretaris Jurusan':
+			if request.method == 'POST' and all (i in request.form for i in ('idAsesmen', 'idPengajuan', 'nilaiMatkul1')) :
+				try:
+					full_name = session['fullname']
+					id_asesmen = request.form['idAsesmen']
+					nilai1 = request.form['nilaiMatkul1']
+					nilai2 = request.form['nilaiMatkul2'] if 'nilaiMatkul2' in request.form else None
+					nilai3 = request.form['nilaiMatkul3'] if 'nilaiMatkul3' in request.form else None
+					nilai4 = request.form['nilaiMatkul4'] if 'nilaiMatkul4' in request.form else None
+					nilai5 = request.form['nilaiMatkul5'] if 'nilaiMatkul5' in request.form else None
+					nilai6 = request.form['nilaiMatkul6'] if 'nilaiMatkul6' in request.form else None
+					nilai7 = request.form['nilaiMatkul7'] if 'nilaiMatkul7' in request.form else None
+					nilai8 = request.form['nilaiMatkul8'] if 'nilaiMatkul8' in request.form else None
+
+					connection = mysql.connection
+					cursor = connection.cursor()
+					cursor.execute ("INSERT INTO tbl_form_assesmen VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (id_asesmen, nilai1, nilai2, nilai3, nilai4, nilai5, nilai6, nilai7, nilai8))
+					cursor.execute ("UPDATE tbl_kegiatan_assesmen SET status_assesmen=%s WHERE id_assesmen=%s", ('Selesai',id_asesmen))
+					connection.commit()
+
+					return "<script>alert('Proses Asesmen Berhasil!'); window.location.href='/sekjur/jadwal-asesmen-sekjur'</script>"
+
+				except Exception :
+					return "<script>alert('Proses Asesmen Gagal!'); window.location.href='/sekjur/jadwal-asesmen-sekjur'</script>"
+
+			else:
+				return "<script>alert('Harap Isi Nilai Mata Kuliah Minimal 1!'); window.location.href='/sekjur/jadwal-asesmen-sekjur'</script>"
+		else:
+			return redirect('/')
+	else:
+		return redirect('/login')

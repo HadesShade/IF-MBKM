@@ -80,8 +80,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="/mahasiswa/index-mhs" class="nav-link active">
+          <li class="nav-item">
+            <a href="/mahasiswa/index-mhs" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Beranda
@@ -105,7 +105,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/mahasiswa/jadwal-asesmen-mhs" class="nav-link">
+            <a href="/mahasiswa/jadwal-asesmen-mhs" class="nav-link active">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Jadwal Asesmen MBKM
@@ -138,7 +138,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/sekjur/jadwal-asesmen-sekjur">Jadwal Asesmen MBKM</a></li>
+              <li class="breadcrumb-item"><a href="/mahasiswa/jadwal-asesmen-mhs">Jadwal Asesmen MBKM</a></li>
               <li class="breadcrumb-item active">Hasil Asesmen MBKM</li>
             </ol>
           </div><!-- /.col -->
@@ -156,6 +156,10 @@
         <!-- form start -->
         <form>
           <div class="card-body">
+            <div class="form-group">
+              <label for="idAsesmen">Nomor Asesmen</label>
+              <input type="text" class="form-control" id="idAsesmen" value="{{ id_asesmen }}" placeholder="Masukkan Nomor Asesmen" readonly>
+            </div>
             <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
               <input type="text" class="form-control" id="idPengajuan" value="{{ id_pengajuan }}" placeholder="Masukkan Nomor Pengajuan" readonly>
@@ -212,7 +216,7 @@
               </div>
             </div>
 
-            <label for="matkul5">Mata Kuliah 2</label>
+            <label for="matkul5">Mata Kuliah 5</label>
             <div class="form-group row" id="matkul5">
               <div class="col-5">
                 <input type="text" class="form-control" id="namaMatkul5" value="{{ namaMatkul5 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
@@ -231,7 +235,7 @@
                 <input type="text" class="form-control" id="namaMatkul6" value="{{ namaMatkul6 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul6" value="{{ dosenMatkul1 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul6" value="{{ dosenMatkul6 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
                 <input type="text" class="form-control" id="nilaiMatkul6" value="{{ nilaiMatkul6 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
@@ -330,24 +334,6 @@
 <script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
-
-<script>
-  $(function () {
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "dom": '<"toolbar">frtip'
-    });
-
-    $('div.toolbar').html('<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Buat Jadwal</button>');
-    $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD/MM/YYYY HH:mm' });
-  });
-</script>
 <!-- Select2 -->
 <script src="{{ url_for ('static',filename='plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
