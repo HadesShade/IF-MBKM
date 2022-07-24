@@ -97,7 +97,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/sekjur/jadwal-asesmen-sekjur" class="nav-link">
+                <a href="/sekjur/jadwal-asesmen-sekjur" class="nav-link active">
                   <i class="nav-icon fas fa-calendar-alt"></i>
                   <p>
                     Jadwal Asesmen
@@ -146,22 +146,26 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form method="POST" action="/sekjur/proses-ubah-hasil">
           <div class="card-body">
             <div class="form-group">
+              <label for="idAsesmen">Nomor Asesmen</label>
+              <input type="text" class="form-control" id="idAsesmen" name="idAsesmen" value="{{ id_asesmen }}" placeholder="Masukkan Nomor Asesmen" readonly>
+            </div>
+            <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
-              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly>
+              <input type="text" class="form-control" id="idPengajuan" name="idPengajuan" value="{{ id_pengajuan }}" placeholder="Masukkan Nomor Pengajuan" readonly>
             </div>
             <label for="matkul1">Mata Kuliah 1</label>
             <div class="form-group row" id="matkul1">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul1" placeholder="Masukkan Nama Mata Kuliah" readonly required>
+                <input type="text" class="form-control" id="namaMatkul1" name="namaMatkul1" value="{{ matkul1 }}" placeholder="Masukkan Nama Mata Kuliah" readonly required>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul1" placeholder="Masukkan Dosen Mata Kuliah" readonly required>
+                <input type="text" class="form-control" id="dosenMatkul1" name="dosenMatkul1" value="{{ dosen1 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly required>
               </div>
               <div class="col-3">
-                <select class="custom-select form-control" id="nilaiMatkul1" required>
+                <select class="custom-select form-control" id="nilaiMatkul1" name="nilaiMatkul1" required>
                   <option value="" disabled selected>-- Pilih Nilai --</option>
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -182,13 +186,13 @@
             <label for="matkul2">Mata Kuliah 2</label>
             <div class="form-group row" id="matkul2">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul2" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul2" name="namaMatkul2" value="{{ matkul2 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul2" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul2" name="dosenMatkul2" value="{{ dosen2 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <select class="custom-select form-control" id="nilaiMatkul2">
+                <select class="custom-select form-control" id="nilaiMatkul2" name="nilaiMatkul2">
                   <option value="" disabled selected>-- Pilih Nilai --</option>
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -209,13 +213,13 @@
             <label for="matkul3">Mata Kuliah 3</label>
             <div class="form-group row" id="matkul3">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul3" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul3" name="namaMatkul3" value="{{ matkul3 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul3" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul3" name="dosenMatkul3" value="{{ dosen3 }}"  placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <select class="custom-select form-control" id="nilaiMatkul3">
+                <select class="custom-select form-control" id="nilaiMatkul3" name="nilaiMatkul3">
                   <option value="" disabled selected>-- Pilih Nilai --</option>
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -236,13 +240,13 @@
             <label for="matkul4">Mata Kuliah 4</label>
             <div class="form-group row" id="matkul4">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul4" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul4" name="namaMatkul4" value="{{ matkul4 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul4" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul4" name="dosenMatkul4" value="{{ dosen4 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <select class="custom-select form-control" id="nilaiMatkul4">
+                <select class="custom-select form-control" id="nilaiMatkul4" name="nilaiMatkul4">
                   <option value="" disabled selected>-- Pilih Nilai --</option>
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -263,13 +267,13 @@
             <label for="matkul5">Mata Kuliah 2</label>
             <div class="form-group row" id="matkul5">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul5" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul5" name="namaMatkul5" value="{{ matkul5 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul5" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul5" name="dosenMatkul5" value="{{ dosen5 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <select class="custom-select form-control" id="nilaiMatkul5">
+                <select class="custom-select form-control" id="nilaiMatkul5" name="nilaiMatkul5">
                   <option value="" disabled selected>-- Pilih Nilai --</option>
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -290,13 +294,13 @@
             <label for="matkul6">Mata Kuliah 6</label>
             <div class="form-group row" id="matkul6">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul6" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul6" name="namaMatkul6" value="{{ matkul6 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul6" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul6" name="dosenMatkul6" value="{{ dosen6 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <select class="custom-select form-control" id="nilaiMatkul6">
+                <select class="custom-select form-control" id="nilaiMatkul6" name="nilaiMatkul6">
                   <option value="" disabled selected>-- Pilih Nilai --</option>
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -317,13 +321,13 @@
             <label for="matkul7">Mata Kuliah 7</label>
             <div class="form-group row" id="matkul7">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul7" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul7" name="namaMatkul7" value="{{ matkul7 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul7" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul7" name="dosenMatkul7" value="{{ dosen7 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <select class="custom-select form-control" id="nilaiMatkul7">
+                <select class="custom-select form-control" id="nilaiMatkul7" name="nilaiMatkul7">
                   <option value="" disabled selected>-- Pilih Nilai --</option>
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -344,13 +348,13 @@
             <label for="matkul8">Mata Kuliah 8</label>
             <div class="form-group row" id="matkul8">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul8" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul8" name="namaMatkul8" value="{{ matkul8 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul8" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul8" name="dosenMatkul8" value="{{ dosen8 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <select class="custom-select form-control" id="nilaiMatkul8">
+                <select class="custom-select form-control" id="nilaiMatkul8" name="nilaiMatkul8">
                   <option value="" disabled selected>-- Pilih Nilai --</option>
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -371,7 +375,7 @@
           <!-- /.card-body -->
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Simpan Hasil Asesmen</button>
-            <button type="submit" class="btn btn-danger">Batal</button>
+            <button type="button" class="btn btn-danger" onclick="window.location.href='/sekjur/jadwal-asesmen-sekjur'">Batal</button>
           </div>
         </form>
       </div>
@@ -435,24 +439,6 @@
 <script src="{{ url_for ('static',filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
-
-<script>
-  $(function () {
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "dom": '<"toolbar">frtip'
-    });
-
-    $('div.toolbar').html('<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Buat Jadwal</button>');
-    $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD/MM/YYYY HH:mm' });
-  });
-</script>
 <!-- Select2 -->
 <script src="{{ url_for ('static',filename='plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
@@ -461,5 +447,29 @@
     $('.select2').select2();
   });
 </script>
+<script>
+  function setMarkStatus(number) {
+    if (document.getElementById("namaMatkul" + number).value === 'Tidak Ada' || document.getElementById("dosenMatkul" + number).value === 'Tidak Ada') {
+      document.getElementById('nilaiMatkul' + number).disabled = true
+    }
+  }
+
+  setMarkStatus('1')
+  setMarkStatus('2')
+  setMarkStatus('3')
+  setMarkStatus('4')
+  setMarkStatus('5')
+  setMarkStatus('6')
+  setMarkStatus('7')
+  setMarkStatus('8')
+</script>
+<script>
+  function selectElement(id, valueToSelect) {    
+    let element = document.getElementById(id);
+    element.value = valueToSelect;
+  }
+</script>
+{{ onload_script | safe}}
+</body>
 </body>
 </html>
