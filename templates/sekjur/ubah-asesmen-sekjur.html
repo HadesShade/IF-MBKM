@@ -146,8 +146,12 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form method="POST" action="/sekjur/proses-ubah-asesmen">
           <div class="card-body">
+            <div class="form-group">
+              <label for="idAsesmen">Nomor Asesmen</label>
+              <input type="text" class="form-control" id="idAsesmen" name="idAsesmen" value="{{ id_asesmen }}" placeholder="Masukkan Nomor Asesmen" readonly required>
+            </div>
             <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
               <input type="text" class="form-control" id="idPengajuan" name="idPengajuan" value="{{ id_pengajuan }}" placeholder="Masukkan Nomor Pengajuan" readonly required>
@@ -167,77 +171,82 @@
             </div>
             <div class="form-group">
               <label for="mahasiswa">Mahasiswa</label>
-              <select class="form-control select2" id="mahasiswa" name="mahasiswa" value="{{ mahasiswa }}" required>
-                <option selected="selected" value="" disabled>-- Pilih Mahasiswa --</option>
-                {{ list_mahasiswa | safe }}
+              <input type="text" class="form-control" id="mahasiswa" name="mahasiswa" value="{{ mahasiswa }}" placeholder="Masukkan Mahasiswa" required readonly>
+            </div>
+            <div class="form-group">
+              <label for="dosen_wali">Dosen Wali</label>
+              <select class="form-control select2" id="dosen_wali" name="dosen_wali" required>
+                <option selected="selected" value="" disabled>-- Pilih Dosen Wali --</option>
+                {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="kajur">Ketua Jurusan</label>
-              <select class="form-control select2" id="kajur" name="kajur" value="{{ kajur }}" required>
-                <option selected="selected" value="" disabled>-- Pilih Ketua Jurusan --</option>
+              <select class="form-control select2" id="kajur" name="kajur" required>
+                <option value="" disabled>-- Pilih Ketua Jurusan --</option>
                 {{ list_kajur | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="kaprodi">Kepala Program Studi</label>
-              <select class="form-control select2" id="kaprodi" name="kaprodi" value="{{ kaprodi }}" required>
-                <option selected="selected" value="" disabled>-- Pilih Kepala Program Studi --</option>
+              <select class="form-control select2" id="kaprodi" name="kaprodi" required>
+                <option value="" disabled>-- Pilih Kepala Program Studi --</option>
                 {{ list_kaprodi | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen1">Dosen Mata Kuliah 1</label>
-              <select class="form-control select2" id="dosen1" name="dosen1" value="{{ dosen1 }}" required>
-                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 1 --</option>
+              <select class="form-control select2" id="dosen1" name="dosen1" required>
+                <option value="" disabled>-- Pilih Dosen Mata Kuliah 1 --</option>
                 {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen2">Dosen Mata Kuliah 2</label>
-              <select class="form-control select2" id="dosen2" name="dosen2" value="{{ dosen2 }}">
-                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 2 --</option>
+              <select class="form-control select2" id="dosen2" name="dosen2">
+                <option value="" disabled>-- Pilih Dosen Mata Kuliah 2 --</option>
                 {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen3">Dosen Mata Kuliah 3</label>
-              <select class="form-control select2" id="dosen3" name="dosen3" value="{{ dosen3 }}">
-                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 3 --</option>
+              <select class="form-control select2" id="dosen3" name="dosen3">
+                <option value="" disabled>-- Pilih Dosen Mata Kuliah 3 --</option>
                 {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen4">Dosen Mata Kuliah 4</label>
-              <select class="form-control select2" id="dosen4" name="dosen4" value="{{ dosen4 }}">
+              <select class="form-control select2" id="dosen4" name="dosen4">
+                <option value="" disabled>-- Pilih Dosen Mata Kuliah 4 --</option>
                 {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen5">Dosen Mata Kuliah 5</label>
-              <select class="form-control select2" id="dosen5" name="dosen5" value="{{ dosen5 }}">
-                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 5 --</option>
+              <select class="form-control select2" id="dosen5" name="dosen5">
+                <option value="" disabled>-- Pilih Dosen Mata Kuliah 5 --</option>
                 {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen6">Dosen Mata Kuliah 6</label>
-              <select class="form-control select2" id="dosen6" name="dosen6" value="{{ dosen6 }}">
-                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 6 --</option>
+              <select class="form-control select2" id="dosen6" name="dosen6">
+                <option value="" disabled>-- Pilih Dosen Mata Kuliah 6 --</option>
                 {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen7">Dosen Mata Kuliah 7</label>
-              <select class="form-control select2" id="dosen7" name="dosen7" value="{{ dosen7 }}">
-                <option selected="selected" value="" disabled>-- Pilih Dosen Mata Kuliah 7 --</option>
+              <select class="form-control select2" id="dosen7" name="dosen7">
+                <option value="" disabled>-- Pilih Dosen Mata Kuliah 7 --</option>
                 {{ list_dosen | safe }}
               </select>
             </div>
             <div class="form-group">
               <label for="dosen8">Dosen Mata Kuliah 8</label>
-              <select class="form-control select2" id="dosen8" name="dosen8" value="{{ dosen8 }}">
-                <option selected="selected" disabled>-- Pilih Dosen Mata Kuliah 8 --</option>
+              <select class="form-control select2" id="dosen8" name="dosen8">
+                <option value="" disabled>-- Pilih Dosen Mata Kuliah 5 --</option>
                 {{ list_dosen | safe }}
               </select>
             </div>
@@ -312,21 +321,7 @@
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
 
 <script>
-  $(function () {
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "dom": '<"toolbar">frtip'
-    });
-
-    $('div.toolbar').html('<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Buat Jadwal</button>');
-    $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD/MM/YYYY HH:mm' });
-  });
+  $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD-MM-YYYY HH:mm' });
 </script>
 <!-- Select2 -->
 <script src="{{ url_for ('static',filename='plugins/select2/js/select2.full.min.js') }}"></script>
@@ -335,13 +330,17 @@
     //Initialize Select2 Elements
     $('.select2').select2();
   });
-
   function selectElement(id, valueToSelect) {    
     let element = document.getElementById(id);
     element.value = valueToSelect;
   }
 </script>
-{{onload_script}}
+<script>
+  function selectElement(id, valueToSelect) {    
+    let element = document.getElementById(id);
+    element.value = valueToSelect;
+  }
 </script>
+{{ onload_script | safe}}
 </body>
 </html>

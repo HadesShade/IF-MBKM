@@ -149,7 +149,7 @@
         <form method="POST" action="">
           <div class="card-body">
             <div class="form-group">
-              <label for="mahasiswa">Nomor Pengajuan</label>
+              <label for="idPengajuan">Nomor Pengajuan</label>
               <select class="form-control select2" id="idPengajuan" name="idPengajuan" required>
                 <option selected="selected" value="" disabled>-- Pilih Nomor Pengajuan --</option>
                 {{ list_pengajuan | safe }}
@@ -322,21 +322,7 @@
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
 
 <script>
-  $(function () {
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "dom": '<"toolbar">frtip'
-    });
-
-    $('div.toolbar').html('<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Buat Jadwal</button>');
     $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD-MM-YYYY HH:mm' });
-  });
 </script>
 <!-- Select2 -->
 <script src="{{ url_for ('static',filename='plugins/select2/js/select2.full.min.js') }}"></script>

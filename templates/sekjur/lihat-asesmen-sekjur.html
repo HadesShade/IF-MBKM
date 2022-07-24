@@ -149,6 +149,10 @@
         <form>
           <div class="card-body">
             <div class="form-group">
+              <label for="idAsesmen">Nomor Asesmen</label>
+              <input type="text" class="form-control" id="idAsesmen" name="idAsesmen" value="{{ id_asesmen }}" placeholder="Masukkan Nomor Asesmen" readonly>
+            </div>
+            <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
               <input type="text" class="form-control" id="idPengajuan" name="idPengajuan" value="{{ id_pengajuan }}" placeholder="Masukkan Nomor Pengajuan" readonly>
             </div>
@@ -166,7 +170,7 @@
             </div>
             <div class="form-group">
               <label for="dosen_wali">Dosen Wali</label>
-              <input type="text" class="form-control" id="dosen_Wali" name="dosen_wali" value="{{ dosen_wali }}" name="mahasiswa" placeholder="Masukkan Mahasiswa" readonly>
+              <input type="text" class="form-control" id="dosen_Wali" name="dosen_wali" value="{{ dosen_wali }}" placeholder="Masukkan Dosen Wali" readonly>
             </div>
             <div class="form-group">
               <label for="kajur">Ketua Jurusan</label>
@@ -278,21 +282,7 @@
 <script src="{{ url_for ('static',filename='dist/js/adminlte.js') }}"></script>
 
 <script>
-  $(function () {
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-      "dom": '<"toolbar">frtip'
-    });
-
-    $('div.toolbar').html('<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Buat Jadwal</button>');
-    $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD/MM/YYYY HH:mm' });
-  });
+    $('#waktuAsesmen').datetimepicker({ icons: { time: 'fas fa-clock' }, format: 'DD-MM-YYYY HH:mm' });
 </script>
 <!-- Select2 -->
 <script src="{{ url_for ('static',filename='plugins/select2/js/select2.full.min.js') }}"></script>
