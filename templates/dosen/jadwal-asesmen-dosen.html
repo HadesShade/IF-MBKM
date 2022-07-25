@@ -149,26 +149,8 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>3311901049-22022022-25022022</td>
-                    <td>
-                      <p>25-02-2022 10:00</p>
-                    </td>
-                    <td>
-                      <p>Gedung TA 11.4</p>
-                    </td>
-                    <td>
-                      <p class="text text-danger">✕ Belum Selesai</p>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i> Pengajuan</button>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i> Berkas</button>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>
-                    </td>
-                  </tr>  
-                  </tfoot>
+                    {{ list_asesmen | safe}}
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
