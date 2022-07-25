@@ -80,15 +80,15 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="/kajur/index-kajur" class="nav-link active">
+          <li class="nav-item">
+            <a href="/kajur/index-kajur" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Beranda
               </p>
             </a>
           <li class="nav-item">
-            <a href="/kajur/jadwal-asesmen-kajur" class="nav-link">
+            <a href="/kajur/jadwal-asesmen-kajur" class="nav-link active">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Jadwal Asesmen
@@ -121,7 +121,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/sekjur/jadwal-asesmen-sekjur">Jadwal Asesmen MBKM</a></li>
+              <li class="breadcrumb-item"><a href="/kajur/jadwal-asesmen-kajur">Jadwal Asesmen MBKM</a></li>
               <li class="breadcrumb-item active">Hasil Asesmen MBKM</li>
             </ol>
           </div><!-- /.col -->
@@ -140,110 +140,114 @@
         <form>
           <div class="card-body">
             <div class="form-group">
+              <label for="idAsesmen">Nomor Asesmen</label>
+              <input type="text" class="form-control" id="idAsesmen" value="{{ id_asesmen }}" placeholder="Masukkan Nomor Asesmen" readonly>
+            </div>
+            <div class="form-group">
               <label for="idPengajuan">Nomor Pengajuan</label>
-              <input type="text" class="form-control" id="idPengajuan" placeholder="Masukkan Nomor Pengajuan" readonly>
+              <input type="text" class="form-control" id="idPengajuan" value="{{ id_pengajuan }}" placeholder="Masukkan Nomor Pengajuan" readonly>
             </div>
             <label for="matkul1">Mata Kuliah 1</label>
             <div class="form-group row" id="matkul1">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul1" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul1" value="{{ namaMatkul1 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul1" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul1" value="{{ dosenMatkul1 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <input type="text" class="form-control" id="nilaiMatkul1" placeholder="Masukkan Nilai Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="nilaiMatkul1" value="{{ nilaiMatkul1 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
               </div>
             </div>
 
             <label for="matkul2">Mata Kuliah 2</label>
             <div class="form-group row" id="matkul2">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul2" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul2" value="{{ namaMatkul2 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul2" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul2" value="{{ dosenMatkul2 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <input type="text" class="form-control" id="nilaiMatkul2" placeholder="Masukkan Nilai Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="nilaiMatkul2" value="{{ nilaiMatkul2 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
               </div>
             </div>
 
             <label for="matkul3">Mata Kuliah 3</label>
             <div class="form-group row" id="matkul3">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul3" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul3" value="{{ namaMatkul3 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul3" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul3" value="{{ dosenMatkul3 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <input type="text" class="form-control" id="nilaiMatkul3" placeholder="Masukkan Nilai Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="nilaiMatkul3" value="{{ namaMatkul3 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
               </div>
             </div>
 
             <label for="matkul4">Mata Kuliah 4</label>
             <div class="form-group row" id="matkul4">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul4" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul4" value="{{ namaMatkul4 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul4" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul4" value="{{ dosenMatkul4 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <input type="text" class="form-control" id="nilaiMatkul4" placeholder="Masukkan Nilai Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="nilaiMatkul4" value="{{ nilaiMatkul4 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
               </div>
             </div>
 
-            <label for="matkul5">Mata Kuliah 2</label>
+            <label for="matkul5">Mata Kuliah 5</label>
             <div class="form-group row" id="matkul5">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul5" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul5" value="{{ namaMatkul5 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul5" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul5" value="{{ dosenMatkul5 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <input type="text" class="form-control" id="nilaiMatkul5" placeholder="Masukkan Nilai Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="nilaiMatkul5" value="{{ nilaiMatkul5 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
               </div>
             </div>
 
             <label for="matkul6">Mata Kuliah 6</label>
             <div class="form-group row" id="matkul6">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul6" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul6" value="{{ namaMatkul6 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul6" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul6" value="{{ dosenMatkul6 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <input type="text" class="form-control" id="nilaiMatkul6" placeholder="Masukkan Nilai Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="nilaiMatkul6" value="{{ nilaiMatkul6 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
               </div>
             </div>
 
             <label for="matkul7">Mata Kuliah 7</label>
             <div class="form-group row" id="matkul7">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul7" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul7" value="{{ namaMatkul7 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul7" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul7" value="{{ dosenMatkul7 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <input type="text" class="form-control" id="nilaiMatkul7" placeholder="Masukkan Nilai Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="nilaiMatkul7" value="{{ nilaiMatkul7 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
               </div>
             </div>
 
             <label for="matkul8">Mata Kuliah 8</label>
             <div class="form-group row" id="matkul8">
               <div class="col-5">
-                <input type="text" class="form-control" id="namaMatkul8" placeholder="Masukkan Nama Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="namaMatkul8" value="{{ namaMatkul8 }}" placeholder="Masukkan Nama Mata Kuliah" readonly>
               </div>
               <div class="col-4">
-                <input type="text" class="form-control" id="dosenMatkul8" placeholder="Masukkan Dosen Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="dosenMatkul8" value="{{ dosenMatkul8 }}" placeholder="Masukkan Dosen Mata Kuliah" readonly>
               </div>
               <div class="col-3">
-                <input type="text" class="form-control" id="nilaiMatkul8" placeholder="Masukkan Nilai Mata Kuliah" readonly>
+                <input type="text" class="form-control" id="nilaiMatkul8" value="{{ nilaiMatkul8 }}" placeholder="Masukkan Nilai Mata Kuliah" readonly>
               </div>
             </div>
           </div>
