@@ -814,7 +814,7 @@ def buat_asesmen_sekjur():
 			else:
 				if all(i in request.form for i in ('idPengajuan','timeAsesmen', 'tempatLink', 'mahasiswa', 'dosen_wali', 'kajur', 'kaprodi', 'dosen1')) :
 					lookup_cursor = cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-					lookup_cursor.execute("SELECT * from tbl_berkas_mbkm where id_pengajuan=%s", request.form['idPengajuan'])
+					lookup_cursor.execute("SELECT * from tbl_berkas_mbkm where id_pengajuan=%s", [request.form['idPengajuan']])
 					berkas_status = lookup_cursor.fetchone()
 					if berkas_status:
 						try:
@@ -2126,6 +2126,7 @@ def logout():
 	session.pop('nomor_induk', None)
 	session.pop('username', None)
 	session.pop('role', None)
+	session.pop('fullname', None)
 	return redirect('/')
 
 @app.route('/get_sks', methods=['POST'])
@@ -2143,7 +2144,12 @@ def get_sks():
 
 @app.route('/uploads/<name>')
 def get_file(name):
-	return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+	if session.get('nomor_induk') and session.get('username') and session.get('role') and session.get('fullname'):
+		if session['role'] == 'Mahasiswa' and session['nomor_induk'] not in name:
+			return redirect('/')
+		return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+	else:
+		return redirect('/login')
 
 @app.route('/mahasiswa/hapus-pengajuan-mhs', methods=['GET'])
 def hapus_pengajuan_mhs():
