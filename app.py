@@ -12,7 +12,7 @@ app.config['MYSQL_USER'] = 'mbkm_sql'
 app.config['MYSQL_PASSWORD'] = 'Pa$$worD'
 app.config['MYSQL_DB'] = 'mbkm_db'
 app.config['MYSQL_PORT'] = 3306
-app.config['UPLOAD_FOLDER'] = '/home/sysop/project/jwp/uploads'
+app.config['UPLOAD_FOLDER'] = '/etc/jwp/IF-MBKM/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1000 * 1000
 mysql = MySQL(app)
 
@@ -828,12 +828,12 @@ def buat_asesmen_sekjur():
 							kaprodi = request.form['kaprodi']
 							dosen1 = request.form['dosen1']
 							dosen2 = request.form['dosen2'] if 'dosen2' in request.form else None
-							dosen3 = request.form['dosen2'] if 'dosen3' in request.form else None
-							dosen4 = request.form['dosen2'] if 'dosen4' in request.form else None
-							dosen5 = request.form['dosen2'] if 'dosen5' in request.form else None
-							dosen6 = request.form['dosen2'] if 'dosen6' in request.form else None
-							dosen7 = request.form['dosen2'] if 'dosen7' in request.form else None
-							dosen8 = request.form['dosen2'] if 'dosen8' in request.form else None
+							dosen3 = request.form['dosen3'] if 'dosen3' in request.form else None
+							dosen4 = request.form['dosen4'] if 'dosen4' in request.form else None
+							dosen5 = request.form['dosen5'] if 'dosen5' in request.form else None
+							dosen6 = request.form['dosen6'] if 'dosen6' in request.form else None
+							dosen7 = request.form['dosen7'] if 'dosen7' in request.form else None
+							dosen8 = request.form['dosen8'] if 'dosen8' in request.form else None
 
 							asesmen_time = waktu_asesmen.split(' ')
 							new_asesmen_time = reverse_date_string(asesmen_time[0]) + ' ' + asesmen_time[1]
@@ -2342,12 +2342,12 @@ def proses_ubah_asesmen():
 					kaprodi = request.form['kaprodi']
 					dosen1 = request.form['dosen1']
 					dosen2 = request.form['dosen2'] if 'dosen2' in request.form else None
-					dosen3 = request.form['dosen2'] if 'dosen3' in request.form else None
-					dosen4 = request.form['dosen2'] if 'dosen4' in request.form else None
-					dosen5 = request.form['dosen2'] if 'dosen5' in request.form else None
-					dosen6 = request.form['dosen2'] if 'dosen6' in request.form else None
-					dosen7 = request.form['dosen2'] if 'dosen7' in request.form else None
-					dosen8 = request.form['dosen2'] if 'dosen8' in request.form else None
+					dosen3 = request.form['dosen3'] if 'dosen3' in request.form else None
+					dosen4 = request.form['dosen4'] if 'dosen4' in request.form else None
+					dosen5 = request.form['dosen5'] if 'dosen5' in request.form else None
+					dosen6 = request.form['dosen6'] if 'dosen6' in request.form else None
+					dosen7 = request.form['dosen7'] if 'dosen7' in request.form else None
+					dosen8 = request.form['dosen8'] if 'dosen8' in request.form else None
 
 					asesmen_time = waktu_asesmen.split(' ')
 					new_asesmen_time = reverse_date_string(asesmen_time[0]) + ' ' + asesmen_time[1]
